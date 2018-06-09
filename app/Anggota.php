@@ -13,7 +13,7 @@ class Anggota extends Authenticatable
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
-        'name', 'username' ,'email','role_id','password','avatar'
+        'nama', 'nim' ,'email','id_role','alamat','password','avatar'
     ];
 
     protected $hidden = [

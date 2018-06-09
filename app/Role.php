@@ -10,7 +10,7 @@ class Role extends Model
       'role_name', 'created_at', 'updated_at'
     ];
 
-    public function users(){
-      return $this->belongsTo('App\User');
+    public function anggota(){
+      return $this->belongsTo('App\Anggota');
     }
 }

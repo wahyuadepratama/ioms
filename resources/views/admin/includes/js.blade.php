@@ -29,7 +29,7 @@
     @if($message = Session::get('success'))
       demo.showNotification('top','right','{{ $message }}');
     @else
-      demo.showNotification('top','right','Welcome Admin');
+      demo.showNotification('top','right','Welcome {{Auth::user()->nama}}');
     @endif
   }
 </script>

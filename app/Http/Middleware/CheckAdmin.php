@@ -10,7 +10,7 @@ class CheckAdmin
 
   public function handle($request, Closure $next)
   {
-    if(Auth::user()->role_id == 1) {
+    if(Auth::user()->id_role == 1) {
         return $next($request);
     }else {
         return abort(404);

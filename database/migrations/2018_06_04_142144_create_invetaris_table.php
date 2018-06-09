@@ -16,7 +16,7 @@ class CreateInvetarisTable extends Migration
         Schema::create('invetaris', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nama');
-            $table->integer('id_jenis');
+            $table->integer('id_jenis')->unsigned()->index();
             $table->foreign('id_jenis')->references('id')->on('jenis_invetaris')->onDelete('cascade')->onUpdate('cascade');
             $table->string('status')->default('Tersedia');
             $table->string('kondisi')->default('Baik');

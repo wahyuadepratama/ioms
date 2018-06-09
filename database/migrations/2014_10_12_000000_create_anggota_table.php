@@ -17,10 +17,12 @@ class CreateAnggotaTable extends Migration
         Schema::create('anggota', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('nim')->unique();
-            $table->string('no_anggota')->unique();
+            $table->string('no_anggota')->unique()->nullable();
             $table->string('nama');
             $table->string('email')->unique();
-            $table->string('alamat');
+            $table->string('no_handphone')->nullable();
+            $table->string('alamat')->nullable();
+            $table->string('kutipan')->nullable();
             $table->string('password');
             $table->string('avatar')->default('default.png');
             $table->integer('id_role')->unsigned()->index();

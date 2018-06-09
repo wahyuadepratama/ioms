@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use App\Anggota;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -22,7 +22,7 @@ class RegisterController extends Controller
 
     use RegistersUsers;
 
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     public function __construct()
     {
@@ -32,21 +32,21 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:191',
-            'username' => 'required|string|max:191|unique:users',
-            'email' => 'required|string|email|max:191|unique:users',
+            'nim' => 'required|string|max:10|unique:anggota',
+            'nama' => 'required|string|max:191',
+            'email' => 'required|string|email|max:191|unique:anggota',
             'password' => 'required|string|min:6|confirmed',
         ]);
     }
 
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'username' => $data['username'],
+        return Anggota::create([
+            'nim' => $data['nim'],
+            'nama' => $data['nama'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'role_id' => 3,
+            'id_role' => 3,
         ]);
     }
 }

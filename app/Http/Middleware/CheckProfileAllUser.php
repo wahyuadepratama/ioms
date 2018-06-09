@@ -20,10 +20,10 @@ class CheckProfileAllUser
           return abort(404);
       }
 
-    }elseif (null !== ($request->route('username'))) {
+    }else{
 
       return $next($request);
-
+      
     }
   }
 }

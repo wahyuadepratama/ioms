@@ -21,7 +21,7 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     public function __construct()
     {
@@ -33,9 +33,17 @@ class LoginController extends Controller
     public function username()
     {
        $login = request()->input('identity');
-       $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+       $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'nim';
        request()->merge([$field => $login]);
        return $field;
+    }
+
+    protected function validateLogin(Request $request)
+    {
+        $this->validate($request, [
+            $this->username() => 'required|string|min:6',
+            'password' => 'required|string',
+        ]);
     }
 
 }
