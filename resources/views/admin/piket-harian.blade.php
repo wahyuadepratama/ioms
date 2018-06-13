@@ -55,29 +55,99 @@
               </div>
               <div class="col-md-6">
                 <div class="card-body table-full-width table-responsive">
-                    <table class="table table-hover table-striped">
+                    <table class="table table-hover">
                         <thead>
                             <th>Hari Piket</th>
                             <th>Nama Pengurus</th>
                             <th>Total Denda</th>
                         </thead>
                         <tbody>
+
                           @php
-                            $count = count($senin);
+                            $count = count($data);
                             $stop = false;
                           @endphp
-                          @foreach($data as $data)
+                          @foreach($data as $senin)
                             <tr>
                               @if($stop == false)
                                 <td rowspan="{{$count}}">Senin</td>
                                 @php $stop = true @endphp
                               @endif
-                              @if($data->jadwal_piket == "Monday")
+                              @if($senin->jadwal_piket == "Monday")
                                 <td>{{$senin->nama}}</td>
-                                <td>{{$senin->denda}}</td>
+                                <td>{{$senin->total_denda}}</td>
                               @endif
                             </tr>
                           @endforeach
+
+                          @php
+                            $count = count($data);
+                            $stop = false;
+                          @endphp
+                          @foreach($data as $selasa)
+                            <tr>
+                              @if($stop == false)
+                                <td rowspan="{{$count}}">Selasa</td>
+                                @php $stop = true @endphp
+                              @endif
+                              @if($selasa->jadwal_piket == "Tuesday")
+                                <td>{{$selasa->nama}}</td>
+                                <td>{{$selasa->total_denda}}</td>
+                              @endif
+                            </tr>
+                          @endforeach
+
+                          @php
+                            $count = count($data);
+                            $stop = false;
+                          @endphp
+                          @foreach($data as $rabu)
+                            <tr>
+                              @if($stop == false)
+                                <td rowspan="{{$count}}">Rabu</td>
+                                @php $stop = true @endphp
+                              @endif
+                              @if($rabu->jadwal_piket == "Wednesday")
+                                <td>{{$rabu->nama}}</td>
+                                <td>{{$rabu->total_denda}}</td>
+                              @endif
+                            </tr>
+                          @endforeach
+
+                          @php
+                            $count = count($data);
+                            $stop = false;
+                          @endphp
+                          @foreach($data as $kamis)
+                            <tr>
+                              @if($stop == false)
+                                <td rowspan="{{$count}}">Kamis</td>
+                                @php $stop = true @endphp
+                              @endif
+                              @if($kamis->jadwal_piket == "Thursday")
+                                <td>{{$kamis->nama}}</td>
+                                <td>{{$kamis->total_denda}}</td>
+                              @endif
+                            </tr>
+                          @endforeach
+
+                          @php
+                            $count = count($data);
+                            $stop = false;
+                          @endphp
+                          @foreach($data as $jumat)
+                            <tr>
+                              @if($stop == false)
+                                <td rowspan="{{$count}}">Jumat</td>
+                                @php $stop = true @endphp
+                              @endif
+                              @if($jumat->jadwal_piket == "Friday")
+                                <td>{{$jumat->nama}}</td>
+                                <td>{{$jumat->total_denda}}</td>
+                              @endif
+                            </tr>
+                          @endforeach
+
                         </tbody>
                     </table>
                 </div>

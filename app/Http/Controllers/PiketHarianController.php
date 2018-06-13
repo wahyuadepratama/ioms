@@ -13,7 +13,9 @@ class PiketHarianController extends Controller
 
     public function index(){
 
-      $data = PengurusPiket::join('anggota','anggota.id','=','pengurus_piket.id_anggota')->get();
+      $data = PengurusPiket::join('anggota','anggota.id','=','pengurus_piket.id_anggota')
+            ->where('anggota.id_role','=',2)
+            ->get();
 
       return $this->checkStatusPiket('admin/piket-harian', 'piket', 'tidak piket','sudah piket')->with('data', $data);
     }
@@ -74,13 +76,13 @@ class PiketHarianController extends Controller
 
     protected function update_total_denda($id,$denda){
 
-      $isi = PengurusPiket::find($id)->select('pengurus_piket.denda')->get();
+      $isi = PengurusPiket::where('id','=',$id)->get();
 
       foreach ($isi as $isi) {
-        $total_denda = $isi->denda + $denda;
+        $total_denda = $isi->total_denda + $denda;
       }
-
-      PengurusPiket::where($id)
+      
+      PengurusPiket::find($id)
               ->update([
                 'total_denda' => $total_denda,
               ]);
