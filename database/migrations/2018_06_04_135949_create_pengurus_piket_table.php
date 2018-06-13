@@ -17,8 +17,9 @@ class CreatePengurusPiketTable extends Migration
             $table->increments('id');
             $table->integer('id_anggota')->unsigned()->index();
             $table->foreign('id_anggota')->references('id')->on('anggota')->onDelete('cascade')->onUpdate('cascade');
-            $table->integer('id_jadwal_piket')->unsigned()->index();
-            $table->foreign('id_jadwal_piket')->references('id')->on('jadwal_piket')->onDelete('cascade')->onUpdate('cascade');            
+            $table->string('jadwal_piket');
+            $table->integer('total_denda');
+            $table->unique(['id_anggota', 'jadwal_piket']);
             $table->timestamps();
         });
     }

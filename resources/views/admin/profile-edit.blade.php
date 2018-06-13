@@ -12,7 +12,7 @@
                         <h4 class="card-title">Update Profile</h4>
                     </div>
                     <div class="card-body">
-                      <form action="/profile/store" method="post">
+                      <form action="/profile/store" method="post" enctype="multipart/form-data">
                           <div class="row" style="padding: 1%;">
                               <div class="col-md-3">
                                 Nama
@@ -35,10 +35,18 @@
                                 :
                               </div>
                               <div class="col-md-8">
-                                <input type="text" class="form-control" placeholder="ex: 1511521024" name="nim" value="{{$data->nim}}">
-                                @if ($errors->has('nim'))
-                                    <small><i>{{$errors->first('nim')}}</i></small>
-                                @endif
+                                {{$data->nim}}
+                              </div>
+                          </div>
+                          <div class="row" style="padding: 1%;">
+                              <div class="col-md-3">
+                                Email
+                              </div>
+                              <div class="col-md-1">
+                                :
+                              </div>
+                              <div class="col-md-8">
+                                {{$data->email}}
                               </div>
                           </div>
                           <div class="row" style="padding: 1%;">
@@ -52,20 +60,6 @@
                                 <input type="text" class="form-control" placeholder="ex: SI06 AB-001" name="no_anggota" value="{{$data->no_anggota}}">
                                 @if ($errors->has('no_anggota'))
                                     <small><i>{{$errors->first('no_anggota')}}</i></small>
-                                @endif
-                              </div>
-                          </div>
-                          <div class="row" style="padding: 1%;">
-                              <div class="col-md-3">
-                                Email
-                              </div>
-                              <div class="col-md-1">
-                                :
-                              </div>
-                              <div class="col-md-8">
-                                <input type="text" class="form-control" placeholder="ex: saya@hmsiunand.com" name="email" value="{{$data->email}}">
-                                @if ($errors->has('email'))
-                                    <small><i>{{$errors->first('email')}}</i></small>
                                 @endif
                               </div>
                           </div>
@@ -100,6 +94,20 @@
                               </div>
                               <div class="col-md-8">
                                 <input type="text" class="form-control" placeholder="ex: 'Hidup itu indah, jadi jalani saja'" name="kutipan" value="{{$data->kutipan}}">
+                              </div>
+                          </div>
+                          <div class="row" style="padding: 1%;">
+                              <div class="col-md-3">
+                                Avatar
+                              </div>
+                              <div class="col-md-1">
+                                :
+                              </div>
+                              <div class="col-md-8">
+                                <input type="file" name="avatar" >
+                                @if ($errors->has('avatar'))
+                                    <small><i>{{$errors->first('avatar')}}</i></small>
+                                @endif
                               </div>
                           </div>
                             {{csrf_field()}}

@@ -41,9 +41,8 @@ class AnggotaController extends Controller
 
       return Validator::make($data, [
           'nama' => 'required|string|max:191',
-          'nim' => 'required|string|max:10',
           'no_anggota' => 'max:10',
-          'email' => 'required|string|email|max:191',
+          'avatar' => 'mimes:jpeg,jpg,png|max:1000',
       ]);
 
   }
@@ -52,12 +51,16 @@ class AnggotaController extends Controller
 
     $this->validator($request->all())->validate();
 
+    if($request->avatar){
+      $avatar = Auth::user()->nim.'.jpg';
+      $request->file('avatar')->storeAs('public/avatar', $avatar);
+      Anggota::where('id',Auth::user()->id)->update(['avatar'=>$avatar]);
+    }
+
     Anggota::where('id', Auth::user()->id)
             ->update([
                       'nama' => $request->nama,
-                      'nim' => $request->nim,
                       'no_anggota' => $request->no_anggota,
-                      'email' => $request->email,
                       'no_handphone' => $request->no_handphone,
                       'alamat' => $request->alamat,
                       'kutipan' => $request->kutipan,

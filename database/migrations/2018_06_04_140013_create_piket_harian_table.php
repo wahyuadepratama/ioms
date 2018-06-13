@@ -17,7 +17,7 @@ class CreatePiketHarianTable extends Migration
             $table->increments('id');
             $table->integer('id_pengurus_piket')->unsigned()->index();
             $table->foreign('id_pengurus_piket')->references('id')->on('pengurus_piket')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('keterangan');
+            $table->string('keterangan')->nullable();
             $table->integer('denda');
             $table->timestamps();
         });

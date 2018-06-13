@@ -9,7 +9,9 @@ class DatabaseSeeder extends Seeder
     {
       $this->call([
         RolesTableSeeder::class,
-        AnggotaTableSeeder::class
+        AnggotaTableSeeder::class,
+        PengurusPiketSeeder::class,
+        PiketHarianSeeder::class
       ]);
     }
 }

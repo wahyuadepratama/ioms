@@ -21,8 +21,8 @@ class AnggotaTableSeeder extends Seeder
           'password' => '$2y$10$.7hqO3OKindL4AA.nxVTb.2QJGo/mpPBNjDc2Uc800T0HTmrl9wGa',
           'id_role' => 1,
           'remember_token' => str_random(40),
-          'created_at'=> Carbon::now(),
-          'updated_at'=> Carbon::now(),
+          'created_at'=> Carbon::now()->setTimezone('Asia/Jakarta'),
+          'updated_at'=> Carbon::now()->setTimezone('Asia/Jakarta'),
         ],
         [
           'nim' => "1511521013",
@@ -32,8 +32,19 @@ class AnggotaTableSeeder extends Seeder
           'password' => '$2y$10$.7hqO3OKindL4AA.nxVTb.2QJGo/mpPBNjDc2Uc800T0HTmrl9wGa',
           'id_role' => 2,
           'remember_token' => str_random(40),
-          'created_at'=> Carbon::now(),
-          'updated_at'=> Carbon::now(),
+          'created_at'=> Carbon::now()->setTimezone('Asia/Jakarta'),
+          'updated_at'=> Carbon::now()->setTimezone('Asia/Jakarta'),
+        ],
+        [
+          'nim' => "1511521025",
+          'nama' => "M. Imam Sutria",
+          'alamat' => "Kampuang dalam, pasar baru",
+          'email' => 'imamsutria@hmsiunand.com',
+          'password' => '$2y$10$.7hqO3OKindL4AA.nxVTb.2QJGo/mpPBNjDc2Uc800T0HTmrl9wGa',
+          'id_role' => 3,
+          'remember_token' => str_random(40),
+          'created_at'=> Carbon::now()->setTimezone('Asia/Jakarta'),
+          'updated_at'=> Carbon::now()->setTimezone('Asia/Jakarta'),
         ],
        ]);
     }

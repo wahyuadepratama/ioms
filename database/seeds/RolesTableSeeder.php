@@ -16,18 +16,18 @@ class RolesTableSeeder extends Seeder
       DB::table('roles')->insert([
         [
           'role_name' => "Admin",
-          'created_at'=> Carbon::now(),
-          'updated_at'=> Carbon::now(),
+          'created_at'=> Carbon::now()->setTimezone('Asia/Jakarta'),
+          'updated_at'=> Carbon::now()->setTimezone('Asia/Jakarta'),
         ],
         [
           'role_name' => "Pengurus",
-          'created_at'=> Carbon::now(),
-          'updated_at'=> Carbon::now(),
+          'created_at'=> Carbon::now()->setTimezone('Asia/Jakarta'),
+          'updated_at'=> Carbon::now()->setTimezone('Asia/Jakarta'),
         ],
         [
           'role_name' => "Anggota",
-          'created_at'=> Carbon::now(),
-          'updated_at'=> Carbon::now(),
+          'created_at'=> Carbon::now()->setTimezone('Asia/Jakarta'),
+          'updated_at'=> Carbon::now()->setTimezone('Asia/Jakarta'),
         ]
        ]);
     }

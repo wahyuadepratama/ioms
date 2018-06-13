@@ -17,8 +17,7 @@ class CreatePengurusPostingTable extends Migration
             $table->increments('id');
             $table->integer('id_anggota')->unsigned()->index();
             $table->foreign('id_anggota')->references('id')->on('anggota')->onDelete('cascade')->onUpdate('cascade');
-            $table->integer('id_jadwal_posting')->unsigned()->index();
-            $table->foreign('id_jadwal_posting')->references('id')->on('jadwal_posting')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('jadwal_posting');
             $table->timestamps();
         });
     }

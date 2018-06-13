@@ -35,11 +35,19 @@
                           <p>Profile</p>
                       </a>
                   </li>
-                  @if(Auth::user()->id == 1)
+                  @if(Auth::user()->id_role == 1)
                   <li class="nav-item {{ Request::is('user-management') ? 'active' : '' }}">
                       <a class="nav-link" href="/user-management">
                           <i class="nc-icon nc-single-02"></i>
                           <p>User Management</p>
+                      </a>
+                  </li>
+                  @endif
+                  @if(Auth::user()->id_role == 2)
+                  <li class="nav-item {{ Request::is('piket-harian') ? 'active' : '' }}">
+                      <a class="nav-link" href="/piket-harian">
+                          <i class="nc-icon nc-tap-01"></i>
+                          <p>Absen Piket Harian</p>
                       </a>
                   </li>
                   @endif
