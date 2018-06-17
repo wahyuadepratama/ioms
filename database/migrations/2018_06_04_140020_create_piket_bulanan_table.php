@@ -15,10 +15,12 @@ class CreatePiketBulananTable extends Migration
     {
         Schema::create('piket_bulanan', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_pengurus_posting')->unsigned()->index();
-            $table->foreign('id_pengurus_posting')->references('id')->on('pengurus_posting')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('keterangan');
-            $table->integer('denda');
+            $table->integer('id_anggota')->unsigned()->index();
+            $table->foreign('id_anggota')->references('id')->on('anggota')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('keterangan')->nullable();
+            $table->string('status')->nullable();
+            $table->string('jadwal_posting');
+            $table->unique('id_anggota');
             $table->timestamps();
         });
     }

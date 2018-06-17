@@ -11,7 +11,8 @@ class DatabaseSeeder extends Seeder
         RolesTableSeeder::class,
         AnggotaTableSeeder::class,
         PengurusPiketSeeder::class,
-        PiketHarianSeeder::class
+        PiketHarianSeeder::class,
+        PiketBulananSeeder::class
       ]);
     }
 }

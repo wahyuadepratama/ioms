@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\PengurusPiket;
 use App\PiketHarian;
+use App\Events\EventPiket;
+use App\Events\DropEventPiket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PiketHarianController extends Controller
 {
@@ -16,7 +19,7 @@ class PiketHarianController extends Controller
       $data = PengurusPiket::join('anggota','anggota.id','=','pengurus_piket.id_anggota')
             ->where('anggota.id_role','=',2)
             ->get();
-
+      event(new EventPiket());
       return $this->checkStatusPiket('admin/piket-harian', 'piket', 'tidak piket','sudah piket')->with('data', $data);
     }
 
@@ -24,18 +27,15 @@ class PiketHarianController extends Controller
     protected function checkStatusPiket($redirect,$statusIfPiket,$statusIfNotPiket,$statusAfterAbsen){
 
       $cek = PengurusPiket::where('id_anggota', '=' , Auth::user()->id)->get();
-
       if($cek->all() != NULL){
-
         foreach ($cek as $data) {
+          // start -- Cek status sudah piket atau belum
           $status = PiketHarian::select('created_at')->where('id_pengurus_piket','=',$data->id)->get();
-
           foreach ($status as $isi) {
-
             if($isi->created_at->toDateString() == Carbon::now()->setTimezone('Asia/Jakarta')->toDateString())
               return view($redirect)->with('status',$statusAfterAbsen);
           }
-
+          // end -- Cek status sudah piket atau belum
           $today = Carbon::now();
           $today = $today->format('l');
 
@@ -67,9 +67,8 @@ class PiketHarianController extends Controller
           'denda' => $denda,
           'created_at' => Carbon::now()->setTimezone('Asia/Jakarta'),
       ]);
-
       $this->update_total_denda($id,$denda);
-
+      event(new DropEventPiket($id));
       return back()->with('success','Terima kasih dan selamat piket untuk hari ini ^_^');
     }
 
@@ -77,11 +76,9 @@ class PiketHarianController extends Controller
     protected function update_total_denda($id,$denda){
 
       $isi = PengurusPiket::where('id','=',$id)->get();
-
       foreach ($isi as $isi) {
         $total_denda = $isi->total_denda + $denda;
       }
-      
       PengurusPiket::find($id)
               ->update([
                 'total_denda' => $total_denda,

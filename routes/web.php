@@ -11,6 +11,9 @@ Route::post('profile/store-password','AnggotaController@storePassword');
 Route::get('piket-harian','PiketHarianController@index');
 Route::post('piket-harian/piket/{denda}/{id}','PiketHarianController@piket');
 
+Route::get('piket-blog','PiketBulananController@index');
+Route::post('piket-blog/piket','PiketBulananController@piket');
+
 Route::get('user-management', 'AdminController@getAllUser');
 Route::post('user-management/delete/{id}','AdminController@deleteUser');
 Route::post('user-management/restore/{id}','AdminController@restoreUser');

@@ -28,8 +28,23 @@
   function message(){
     @if($message = Session::get('success'))
       demo.showNotification('top','right','{{ $message }}');
+    @elseif($errors->first())
+      demo.showNotification('top','right','Error ! Sepertinya ada sesuatu yang salah..');
     @else
-      demo.showNotification('top','right','Welcome {{Auth::user()->nama}}');
+      var x = Math.floor((Math.random() * 5) + 1);
+
+      if(x == 1){
+        demo.showNotification('top','right','Welcome {{Auth::user()->nama}}')
+      }else if(x == 2){
+        demo.showNotification('top','right','Jangan lupa lengkapi profile kamu {{Auth::user()->nama}}');
+      }else if(x == 3){
+        demo.showNotification('top','right','Selamat Datang di IOMS HMSI');
+      }else if(x == 4){
+        demo.showNotification('top','right','Untuk peminjaman inventaris jangan lupa hubungi pengurus HMSI');
+      }else if(x == 5){
+        demo.showNotification('top','right','Profile digunakan untuk melengkapi pendataan anggota HMSI');
+      }
+
     @endif
   }
 </script>

@@ -50,6 +50,12 @@
                           <p>Absen Piket Harian</p>
                       </a>
                   </li>
+                  <li class="nav-item {{ Request::is('piket-blog') ? 'active' : '' }}">
+                      <a class="nav-link" href="/piket-blog">
+                          <i class="nc-icon nc-globe-2"></i>
+                          <p>Piket Blog</p>
+                      </a>
+                  </li>
                   @endif
               </ul>
           </div>
@@ -57,7 +63,13 @@
       <div class="main-panel">
 
         <nav class="navbar navbar-expand-lg " color-on-scroll="500">
-            <div class=" container-fluid  ">
+            <div class="container-fluid ">
+              <a class="navbar-brand" href="#pablo"> {{Auth::user()->nama}} </a>
+              <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-bar burger-lines"></span>
+                  <span class="navbar-toggler-bar burger-lines"></span>
+                  <span class="navbar-toggler-bar burger-lines"></span>
+              </button>
 
                 <div class="collapse navbar-collapse justify-content-end" id="navigation">
 

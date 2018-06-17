@@ -104,7 +104,7 @@
                                 :
                               </div>
                               <div class="col-md-8">
-                                <input type="file" name="avatar" >
+                                <input type="file" name="avatar" ><br>
                                 @if ($errors->has('avatar'))
                                     <small><i>{{$errors->first('avatar')}}</i></small>
                                 @endif

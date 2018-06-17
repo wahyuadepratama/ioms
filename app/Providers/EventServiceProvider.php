@@ -13,8 +13,17 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'App\Events\Event' => [
-            'App\Listeners\EventListener',
+        'App\Events\EventPiket' => [
+            'App\Listeners\EventListenerIfNotPiket',
+        ],
+        'App\Events\DropEventPiket' => [
+            'App\Listeners\DropEventListenerIfPiket',
+        ],
+        'App\Events\EventPosting' => [
+            'App\Listeners\EventListenerIfPosting',
+        ],
+        'App\Events\DropEventPosting' => [
+            'App\Listeners\DropEventListenerIfPosting',
         ],
     ];
 
