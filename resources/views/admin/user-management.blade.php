@@ -14,11 +14,18 @@
                     </div>
                     <div class="card-body">
                       <div class="card-body table-full-width table-responsive">
-                          <table class="table table-hover table-striped">
+
+                          <!-- just for datatable -->
+                          <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+                          <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+                          <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" charset="utf-8"></script>
+                          <!-- just for datatable -->
+
+                          <table class="table table-hover table-striped" id="table_id2">
                               <thead>
-                                  <th>No</th>
-                                  <th>Name</th>
-                                  <th>Username</th>
+                                  <th>ID</th>
+                                  <th>NIM</th>
+                                  <th>Nama</th>
                                   <th>Action</th>
 
                               </thead>
@@ -26,8 +33,8 @@
                                 @foreach($users as $data)
                                   <tr>
                                       <td>{{$data->id}}</td>
-                                      <td>{{$data->name}}</td>
-                                      <td>{{$data->username}}</td>
+                                      <td>{{$data->nim}}</td>
+                                      <td>{{$data->nama}}</td>
                                       <td>
                                         <a class="btn btn-warning btn-fill" data-toggle="modal" data-target="#view{{$data->id}}" href="#view{{$data->id}}">
                                             view
@@ -42,18 +49,27 @@
                                                                 <div class="author">
                                                                     <a href="#">
                                                                         <img class="avatar border-gray" src="/storage/avatar/{{$data->avatar}}" alt="...">
-                                                                        <h5 class="title">{{$data->name}}</h5>
+                                                                        <h5 class="title">{{$data->no_anggota}}</h5>
                                                                     </a>
                                                                     <p class="description">
                                                                         {{$data->email}}
                                                                     </p>
+                                                                    <p class="description">
+                                                                        {{$data->no_handphone}}
+                                                                    </p>
+                                                                    <p class="description">
+                                                                      {{$data->alamat}}
+                                                                    </p>
+                                                                    <p class="description">
+                                                                      <i>{{$data->kutipan}}</i>
+                                                                    </p>
                                                                 </div>
                                                                 <p class="description text-center">
                                                                     <ul>
-                                                                      Account Created : {{$data->created_at}}
+                                                                      <small>Account Created : {{$data->created_at}}</small>
                                                                     </ul>
                                                                     <ul>
-                                                                      Account Updated : {{$data->updated_at}}
+                                                                      <small>Account Updated : {{$data->updated_at}}</small>
                                                                     </ul>
                                                                 </p>
                                                             </div>
@@ -62,8 +78,7 @@
                                                 </div>
                                             </div>
                                             <!--  End Modal -->
-
-                                        <a href="#"><button type="submit" class="btn btn-info btn-fill pull-right "><li class="fa fa-edit"></li></button></a>&nbsp;
+                                        <a class="btn btn-fill" href="/user-management/config/{{$data->id}}"><li class="fa fa-cogs"></li></a>&nbsp;
                                         <a class="btn btn-danger btn-fill" data-toggle="modal" data-target="#delete{{$data->id}}" href="#delete{{$data->id}}"><li class="fa fa-times"></li></a>&nbsp;
 
                                         <div class="modal fade modal modal-primary" id="delete{{$data->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -75,10 +90,10 @@
                                                       </div>
                                                   </div>
                                                   <div class="modal-body text-center">
-                                                      <p>Apakah anda yakin user ini akan dihapus?</p>
+                                                      <p>Apakah anda yakin user ini akan diblokir?</p>
                                                   </div>
                                                   <div class="modal-footer">
-                                                    <form action="/admin/user-management/delete/{{$data->id}}" method="post">
+                                                    <form action="/user-management/delete/{{$data->id}}" method="post">
                                                       <button type="submit" class="btn btn-link btn-simple">Ya</button>
                                                       <button type="button" class="btn btn-link btn-simple" data-dismiss="modal">Close</button>
                                                       {{csrf_field()}}
@@ -93,6 +108,11 @@
                                 @endforeach
                               </tbody>
                           </table>
+                          <script type="text/javascript">
+                            $(document).ready( function () {
+                              $('#table_id2').DataTable();
+                            } );
+                          </script>
                       </div>
                     </div>
                 </div>
@@ -101,22 +121,22 @@
             <div class="col-md-4">
                 <div class="card strpied-tabled-with-hover">
                     <div class="card-header ">
-                        <h4 class="card-title">User Deleted</h4>
-                        <p class="card-category">Daftar user yang telah dihapus</p>
+                        <h4 class="card-title">User Blokir</h4>
+                        <p class="card-category">Daftar user yang telah diblokir</p>
                     </div>
                     <div class="card-body">
                       <table class="table table-hover table-striped">
                           <thead>
-                              <th>Username</th>
+                              <th>Nama</th>
                               <th>Action</th>
                           </thead>
                           <tbody>
                             @foreach($deletedUsers as $data)
                               <tr>
-                                <td>{{$data->username}}</td>
+                                <td>{{$data->nama}}</td>
                                 <td>
-                                  <form action="/admin/user-management/restore/{{$data->id}}" method="post">
-                                    <button type="submit" class="btn btn-primary btn-fill" name="button">restore</button>
+                                  <form action="/user-management/restore/{{$data->id}}" method="post">
+                                    <button type="submit" class="btn btn-primary btn-fill" name="button">Buka Blokir</button>
                                     {{csrf_field()}}
                                   </form>
                                 </td>

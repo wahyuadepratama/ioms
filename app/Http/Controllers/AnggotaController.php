@@ -69,19 +69,24 @@ class AnggotaController extends Controller
   }
 
   public function validatorPassword(array $data){
-
     return Validator::make($data, [
         'password' => 'max:191|confirmed|min:6',
     ]);
   }
 
   public function storePassword(Request $request){
-
     $this->validatorPassword($request->all())->validate();
-
     Anggota::where('id', Auth::user()->id)
             ->update(['password' => bcrypt($request->password), ]);
 
     return redirect('profile')->with('success','You have successfully update your password');
+  }
+
+  public function getAllUser(){
+    $users = Anggota::join('roles','roles.id','=','anggota.id_role')
+              ->select('roles.*','anggota.*')
+              ->where('anggota.id_role','!=','1')
+              ->get();
+    return view('admin.anggota-hmsi',['users'=>$users]);
   }
 }

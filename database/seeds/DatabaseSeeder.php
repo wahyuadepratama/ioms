@@ -12,7 +12,7 @@ class DatabaseSeeder extends Seeder
         AnggotaTableSeeder::class,
         PengurusPiketSeeder::class,
         PiketHarianSeeder::class,
-        PiketBulananSeeder::class
+        PiketBulananSeeder::class,
       ]);
     }
 }

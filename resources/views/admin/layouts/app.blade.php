@@ -57,6 +57,12 @@
                       </a>
                   </li>
                   @endif
+                  <li class="nav-item {{ Request::is('anggota-hmsi') ? 'active' : '' }}">
+                      <a class="nav-link" href="/anggota-hmsi">
+                          <i class="nc-icon nc-single-copy-04"></i>
+                          <p>Anggota HMSI</p>
+                      </a>
+                  </li>
               </ul>
           </div>
       </div>
