@@ -13,6 +13,8 @@ class DatabaseSeeder extends Seeder
         PengurusPiketSeeder::class,
         PiketHarianSeeder::class,
         PiketBulananSeeder::class,
+        JenisInventarisSeeder::class,
+        InventarisSeeder::class,
       ]);
     }
 }

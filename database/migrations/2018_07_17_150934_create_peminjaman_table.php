@@ -18,7 +18,7 @@ class CreatePeminjamanTable extends Migration
             $table->integer('id_peminjam')->unsigned()->index();
             $table->foreign('id_peminjam')->references('id')->on('peminjam')->onDelete('cascade')->onUpdate('cascade');
             $table->integer('id_inventaris')->unsigned()->index();
-            $table->foreign('id_inventaris')->references('id')->on('invetaris')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('id_inventaris')->references('id')->on('inventaris')->onDelete('cascade')->onUpdate('cascade');
             $table->string('durasi');
             $table->boolean('active');
             $table->datetime('tanggal_pinjam');

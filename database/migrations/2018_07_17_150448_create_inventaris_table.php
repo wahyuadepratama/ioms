@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateJenisInvetarisTable extends Migration
+class CreateInventarisTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,15 @@ class CreateJenisInvetarisTable extends Migration
      */
     public function up()
     {
-        Schema::create('jenis_invetaris', function (Blueprint $table) {
+        Schema::create('inventaris', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nama');
-            $table->string('keterangan');            
+            $table->integer('id_jenis')->unsigned()->index();
+            $table->foreign('id_jenis')->references('id_jenis')->on('jenis_inventaris')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('status')->default('Tersedia');
+            $table->string('kondisi')->default('Baik');
+            $table->string('keterangan')->nullable();
+            $table->integer('qty');
             $table->timestamps();
         });
     }

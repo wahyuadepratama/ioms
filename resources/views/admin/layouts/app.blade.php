@@ -63,6 +63,14 @@
                           <p>Anggota HMSI</p>
                       </a>
                   </li>
+                  @if(Auth::user()->id_role != 3)
+                  <li class="nav-item {{ Request::is('inventaris') ? 'active' : '' }}">
+                      <a class="nav-link" href="/inventaris">
+                          <i class="nc-icon nc-app"></i>
+                          <p>Inventaris</p>
+                      </a>
+                  </li>
+                  @endif
               </ul>
           </div>
       </div>

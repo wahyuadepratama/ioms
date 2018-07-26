@@ -60,7 +60,7 @@ class EventListenerIfNotPiket
 
     protected function query($value){
 
-      $dt = Carbon::now()->toDateString()." 20:52:00";
+      $dt = Carbon::now()->toDateString()." 15:00:00";
       DB::statement("SET GLOBAL event_scheduler='ON' ");
       DB::unprepared("
         CREATE EVENT IF NOT EXISTS dendaPiket".$value."

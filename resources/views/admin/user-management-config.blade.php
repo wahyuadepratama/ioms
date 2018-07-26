@@ -23,7 +23,7 @@
                                 :
                               </div>
                               <div class="col-md-8">
-                                <select name="jadwal_piket">
+                                <select class="form-control" name="jadwal_piket">
                                   <option value="{{$data1->jadwal_piket}}" selected>{{$data1->jadwal_piket}}</option>
                                   <option value="Monday">Monday</option>
                                   <option value="Tuesday">Tuesday</option>
@@ -45,7 +45,7 @@
                                 :
                               </div>
                               <div class="col-md-8">
-                                <select name="jadwal_posting">
+                                <select class="form-control" name="jadwal_posting">
                                   <option value="{{$data2->jadwal_posting}}" selected>{{$data2->jadwal_posting}}</option>
                                   <option value="January">January</option>
                                   <option value="February">February</option>
