@@ -46,21 +46,6 @@
 
                         <div class="row" style="padding: 1%;">
                             <div class="col-md-3">
-                              Status
-                            </div>
-                            <div class="col-md-1">
-                              :
-                            </div>
-                            <div class="col-md-8">
-                              <select class="form-control" name="status">
-                                <option value="Tersedia" selected>Tersedia</option>
-                                <option value="Tidak Tersedia">Tidak Tersedia</option>
-                              </select>
-                            </div>
-                        </div>
-
-                        <div class="row" style="padding: 1%;">
-                            <div class="col-md-3">
                               Kondisi
                             </div>
                             <div class="col-md-1">

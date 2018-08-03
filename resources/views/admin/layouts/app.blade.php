@@ -70,6 +70,12 @@
                           <p>Inventaris</p>
                       </a>
                   </li>
+                  <li class="nav-item {{ Request::is('peminjaman') ? 'active' : '' }}">
+                      <a class="nav-link" href="/peminjaman">
+                          <i class="nc-icon nc-zoom-split"></i>
+                          <p>List Peminjaman</p>
+                      </a>
+                  </li>
                   @endif
               </ul>
           </div>

@@ -9,11 +9,7 @@
             <div class="col-md-12">
                 <div class="card strpied-tabled-with-hover">
                     <div class="card-header ">
-                        <h4 class="card-title">Inventaris HMSI</h4>
-                        <p class="card-category">Daftar Inventaris HMSI</p>
-                    </div>
-                    <div class="card-header">
-                      <a href="/inventaris/create" class="btn btn-info ">Tambah Inventaris</a>
+                        <h4 class="card-title">Daftar Peminjam Inventaris</h4>
                     </div>
                     <div class="card-body">
                       <div class="card-body table-full-width table-responsive">
@@ -27,31 +23,37 @@
                           <table class="table table-hover" id="table_id">
                               <thead>
                                   <th>No</th>
-                                  <th>Nama</th>
-                                  <th>Jenis</th>
+                                  <th>Peminjam</th>
+                                  <th>NIM</th>
+                                  <th>Inventaris</th>
                                   <th>Status</th>
-                                  <th>Kondisi</th>
-                                  <th>Jumlah</th>
+                                  <th>Tanggal Pinjam</th>
                                   <th>More</th>
 
                               </thead>
                               <tbody>
                                 @php $no=1; @endphp
-                                @foreach($inventaris as $data)
+                                @foreach($peminjaman as $data)
                                   <tr>
                                       <td>{{$no}}</td>
+                                      <td>{{$data->nama_peminjam}}</td>
+                                      <td>{{$data->nim}}</td>
                                       <td>{{$data->nama}}</td>
-                                      <td>{{$data->nama_jenis}}</td>
-                                      <td>{{$data->status}}</td>
-                                      <td>{{$data->kondisi}}</td>
-                                      <td>{{$data->qty}}</td>
                                       <td>
-                                        <a class="btn btn-warning btn-fill" data-toggle="modal" data-target="#view{{$data->id}}" href="#view{{$data->id}}">
+                                        @if($data->active == true)
+                                          @php echo "Belum Dikembalikan"; @endphp
+                                        @else
+                                            @php echo "Sudah Dikembalikan"; @endphp
+                                        @endif
+                                      </td>
+                                      <td>{{$data->tanggal_pinjam}}</td>
+                                      <td>
+                                        <a class="btn btn-danger btn-fill" data-toggle="modal" data-target="#view{{$data->id_peminjaman}}" href="#view{{$data->id}}">
                                             Show
                                         </a>
 
                                             <!-- Mini Modal -->
-                                            <div class="modal fade modal modal-primary" id="view{{$data->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                            <div class="modal fade modal modal-primary" id="view{{$data->id_peminjaman}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                   <div class="col-md-12" style="padding-top: 5%;">
                                                     <div class="card">
@@ -62,27 +64,22 @@
                                                             <p class="description text-center" style="text-align:center;">
                                                               <table>
                                                                 <tr>
-                                                                  <td>Keterangan</td>
+                                                                  <td>Tanggal Kembali</td>
                                                                   <td>:</td>
-                                                                  <td>{{$data->keterangan}}</td>
+                                                                  <td>{{$data->tanggal_kembali}}</td>
                                                                 </tr>
                                                                 <tr>
-                                                                  <td>Tanggal Input</td>
+                                                                  <td>Durasi</td>
                                                                   <td>:</td>
-                                                                  <td>{{$data->created_at}}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                  <td>Tanggal Diubah</td>
-                                                                  <td>:</td>
-                                                                  <td>{{$data->updated_at}}</td>
+                                                                  <td>{{$data->durasi}} Hari</td>
                                                                 </tr>
                                                                 <tr>
                                                                   <td>Action</td>
                                                                   <td>:</td>
                                                                   <td>
-                                                                    <a href="/inventaris/delete/{{$data->id}}" class="btn btn-danger" style="margin-right: 2px;" >Delete</a>
-                                                                    <a href="/inventaris/update/{{$data->id}}" class="btn btn-info" style="margin-right: 2px;">Update</a>
-                                                                    <a href="/inventaris/peminjaman/{{$data->id}}" class="btn btn-warning">Pinjam</a>
+                                                                    @if($data->active == true)
+                                                                      <a href="/peminjaman/pengembalian/{{$data->id}}" class="btn btn-danger" style="margin-right: 2px;">Kembalikan</a>
+                                                                    @endif
                                                                   </td>
                                                                 </tr>
                                                               </table>

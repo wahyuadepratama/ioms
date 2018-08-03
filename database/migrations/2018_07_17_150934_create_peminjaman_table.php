@@ -23,6 +23,7 @@ class CreatePeminjamanTable extends Migration
             $table->boolean('active');
             $table->datetime('tanggal_pinjam');
             $table->datetime('tanggal_kembali')->nullable();
+            $table->timestamps();
         });
     }
 

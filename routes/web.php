@@ -33,6 +33,12 @@ Route::get('inventaris/delete/{id}','InventarisController@delete');
 Route::post('jenis-inventaris/store','InventarisController@storeJenis');
 Route::get('jenis-inventaris/delete/{id}','InventarisController@deleteJenis');
 
+Route::get('inventaris/peminjaman/{id}','PeminjamanController@index');
+Route::post('inventaris/peminjaman/store','PeminjamanController@store');
+
+Route::get('peminjaman','PeminjamanController@showAll');
+Route::get('peminjaman/pengembalian/{id}','PeminjamanController@updatePengembalian');
+
 // Route::get('{username_edit}/profile','AnggotaController@edit');
 // Route::get('{username}','AnggotaController@index');
 

@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Validator;
 class InventarisController extends Controller
 {
   public function __construct(){
-
       $this->middleware('auth');
   }
 
@@ -25,7 +24,6 @@ class InventarisController extends Controller
   public function validator(array $data){
       return Validator::make($data, [
           'nama' => 'required|string|max:191',
-          'status' => 'required|string',
           'kondisi' => 'required|string',
           'qty' => 'required|integer',
       ]);
@@ -41,7 +39,7 @@ class InventarisController extends Controller
     Inventaris::create([
         'nama' => $request->nama,
         'id_jenis' => $request->id_jenis,
-        'status' => $request->status,
+        'status' => 'Tersedia',
         'kondisi' => $request->kondisi,
         'keterangan' => $request->keterangan,
         'qty' => $request->qty,
@@ -61,8 +59,6 @@ class InventarisController extends Controller
     $inventaris = Inventaris::find($request->id);
     $inventaris->nama = $request->nama;
     $inventaris->id_jenis = $request->id_jenis;
-    $inventaris->status = $request->status;
-    $inventaris->kondisi = $request->kondisi;
     $inventaris->keterangan = $request->keterangan;
     $inventaris->qty = $request->qty;
     $inventaris->updated_at = Carbon::now()->setTimezone('Asia/Jakarta');
@@ -84,7 +80,7 @@ class InventarisController extends Controller
     ]);
     return redirect('inventaris/create')->with('success','Jenis Inventaris Berhasil Ditambah!');
   }
-  
+
   public function deleteJenis($id){
     $jenis = JenisInventaris::where('id_jenis',$id);
     $jenis->delete();
