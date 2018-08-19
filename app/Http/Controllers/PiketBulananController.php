@@ -11,8 +11,12 @@ use Illuminate\Support\Facades\Auth;
 
 class PiketBulananController extends Controller
 {
-    public function index(){
+    public function __construct(){ //----------------------------------------------------------------- construct()
+        $this->middleware('auth');
+        $this->middleware('pengurus');
+    }
 
+    public function index(){ // -------------------------------------------------------- index()
       $data = PiketBulanan::join('anggota','anggota.id','=','piket_bulanan.id_anggota')
             ->where('anggota.id_role','=',2)
             ->get();
@@ -20,8 +24,7 @@ class PiketBulananController extends Controller
       return $this->checkStatusPiket()->with('data',$data);
     }
 
-    public function piket(){
-
+    public function piket(){ // -------------------------------------------------------- piket()
       PiketBulanan::where('id_anggota','=',Auth::user()->id)
               ->update([
                 'status' => "sudah piket",
@@ -31,11 +34,8 @@ class PiketBulananController extends Controller
       return back()->with('success','Terima kasih telah mengambil absen');
     }
 
-
-    protected function checkStatusPiket(){
-
+    protected function checkStatusPiket(){ // -------------------------------------------------------- checkStatusPiket()
       $cek = PiketBulanan::where('id_anggota','=',Auth::user()->id)->get();
-
       if($cek->all() != NULL){
         foreach ($cek as $data) {
           if($data->status == "belum piket"){

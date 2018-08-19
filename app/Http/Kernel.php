@@ -59,6 +59,10 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         // cuztome disini
         'admin' => \App\Http\Middleware\CheckAdmin::class,
-        'profile' => \App\Http\Middleware\CheckProfileAllUser::class,
+        'pengurus' => \App\Http\Middleware\CheckPengurus::class,
+        'anggota' => \App\Http\Middleware\CheckAnggota::class,
+        'admin-pengurus' => \App\Http\Middleware\CheckAdminPengurus::class,
+        'admin-anggota' => \App\Http\Middleware\CheckAdminAnggota::class,
+        'pengurus-anggota' => \App\Http\Middleware\CheckAnggotaPengurus::class,
     ];
 }

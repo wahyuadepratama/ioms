@@ -26,6 +26,7 @@
                                   <th>ID</th>
                                   <th>NIM</th>
                                   <th>Nama</th>
+                                  <th>Roles</th>
                                   <th>Action</th>
 
                               </thead>
@@ -35,6 +36,7 @@
                                       <td>{{$data->id}}</td>
                                       <td>{{$data->nim}}</td>
                                       <td>{{$data->nama}}</td>
+                                      <td>{{$data->role_name}}</td>
                                       <td>
                                         <a class="btn btn-warning btn-fill" data-toggle="modal" data-target="#view{{$data->id}}" href="#view{{$data->id}}">
                                             view

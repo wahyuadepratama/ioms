@@ -2,7 +2,8 @@
 
 Auth::routes();
 
-Route::get('/', 'AnggotaController@index');
+Route::get('/', 'DashboardController@index');
+
 Route::get('profile', 'AnggotaController@profile');
 Route::get('profile/edit', 'AnggotaController@edit');
 Route::post('profile/store', 'AnggotaController@store');
@@ -20,6 +21,7 @@ Route::post('user-management/restore/{id}','AdminController@restoreUser');
 Route::get('user-management/config/{id}','AdminController@showJadwalPiket');
 Route::post('user-management/config/store','AdminController@storeJadwalPiket');
 Route::get('user-management/reset-password/{id}','AdminController@resetPassword');
+Route::post('user-management/change-role/{id}','AdminController@changeRole');
 
 Route::get('anggota-hmsi','AnggotaController@getAllUser');
 
@@ -38,10 +40,3 @@ Route::post('inventaris/peminjaman/store','PeminjamanController@store');
 
 Route::get('peminjaman','PeminjamanController@showAll');
 Route::get('peminjaman/pengembalian/{id}','PeminjamanController@updatePengembalian');
-
-// Route::get('{username_edit}/profile','AnggotaController@edit');
-// Route::get('{username}','AnggotaController@index');
-
-// Route::group(['middleware' => ['auth','admin']], function(){
-//
-// });

@@ -14,8 +14,12 @@ use Illuminate\Support\Facades\DB;
 class PiketHarianController extends Controller
 {
 
-    public function index(){
+    public function __construct(){ //----------------------------------------------------------------- construct()
+        $this->middleware('auth');
+        $this->middleware('pengurus');
+    }
 
+    public function index(){ // -------------------------------------------------------- index()
       $data = PengurusPiket::join('anggota','anggota.id','=','pengurus_piket.id_anggota')
             ->where('anggota.id_role','=',2)
             ->get();
@@ -23,9 +27,8 @@ class PiketHarianController extends Controller
       return $this->checkStatusPiket('admin/piket-harian', 'piket', 'tidak piket','sudah piket')->with('data', $data);
     }
 
-
-    protected function checkStatusPiket($redirect,$statusIfPiket,$statusIfNotPiket,$statusAfterAbsen){
-
+    protected function checkStatusPiket($redirect,$statusIfPiket,$statusIfNotPiket,$statusAfterAbsen){ // --------------------- checkStatusPiket()
+      $configurasi = \Config::get('ioms.piket.harian');
       $cek = PengurusPiket::where('id_anggota', '=' , Auth::user()->id)->get();
       if($cek->all() != NULL){
         foreach ($cek as $data) {
@@ -41,15 +44,15 @@ class PiketHarianController extends Controller
 
           if($data->jadwal_piket == $today){
             $date = Carbon::now()->setTimezone('Asia/Jakarta');
-            if($date->hour < 9){ $denda = 0; }
-            elseif($date->hour == 9 && $date->minute <= 15){ $denda = 0; }
-            elseif($date->hour <= 10){ $denda = 2000; }
-            elseif($date->hour <= 11){ $denda = 4000; }
-            elseif($date->hour <= 12){ $denda = 6000; }
-            elseif ($date->hour <= 13){ $denda = 8000; }
-            elseif($date->hour <= 14){ $denda = 10000; }
-            elseif($date->hour <= 15){ $denda = 15000; }
-            else{ $denda = 15000; }
+            if($date->hour < $configurasi['jam-mulai-piket']){ $denda = 0; }
+            elseif($date->hour == $configurasi['jam-mulai-piket'] && $date->minute <= $configurasi['menit-tambahan-mulai-piket']){ $denda = $configurasi['denda-on-time']; }
+            elseif($date->hour <= 10){ $denda = $configurasi['denda-satu-jam']; }
+            elseif($date->hour <= 11){ $denda = $configurasi['denda-dua-jam']; }
+            elseif($date->hour <= 12){ $denda = $configurasi['denda-tiga-jam']; }
+            elseif ($date->hour <= 13){ $denda = $configurasi['denda-empat-jam']; }
+            elseif($date->hour <= 14){ $denda = $configurasi['denda-lima-jam']; }
+            elseif($date->hour <= 15){ $denda = $configurasi['denda-enam-jam']; }
+            else{ $denda = $configurasi['denda-diatas-enam-jam']; }
 
             return view($redirect,['denda'=>$denda,'pengurus_piket'=>$data->id])->with('status',$statusIfPiket);
           }
@@ -58,9 +61,7 @@ class PiketHarianController extends Controller
       return view($redirect)->with('status',$statusIfNotPiket);
     }
 
-
-    public function piket($denda, $id, Request $request){
-
+    public function piket($denda, $id, Request $request){ // -------------------------------------------------------- piket()
       PiketHarian::create([
           'id_pengurus_piket' => $id,
           'keterangan' => $request->keterangan,
@@ -72,9 +73,7 @@ class PiketHarianController extends Controller
       return back()->with('success','Terima kasih dan selamat piket untuk hari ini ^_^');
     }
 
-
-    protected function update_total_denda($id,$denda){
-
+    protected function update_total_denda($id,$denda){ // -------------------------------------------------------- update_total_denda()
       $isi = PengurusPiket::where('id','=',$id)->get();
       foreach ($isi as $isi) {
         $total_denda = $isi->total_denda + $denda;

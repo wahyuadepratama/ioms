@@ -56,7 +56,7 @@
                               <div class="col-md-1">
                                 :
                               </div>
-                              <div class="col-md-8">
+                              <div class="col-md-4">
                                 <input type="text" class="form-control" placeholder="ex: SI06 AB-001" name="no_anggota" value="{{$data->no_anggota}}">
                                 @if ($errors->has('no_anggota'))
                                     <small><i>{{$errors->first('no_anggota')}}</i></small>
@@ -70,10 +70,46 @@
                               <div class="col-md-1">
                                 :
                               </div>
-                              <div class="col-md-8">
+                              <div class="col-md-4">
                                 <input type="text" class="form-control" placeholder="ex: 08123456789" name="no_handphone" value="{{$data->no_handphone}}">
                               </div>
                           </div>
+                          <div class="row" style="padding: 1%;">
+                              <div class="col-md-3">
+                                Tempat Lahir
+                              </div>
+                              <div class="col-md-1">
+                                :
+                              </div>
+                              <div class="col-md-8">
+                                <input type="text" class="form-control" placeholder="ex: wahyu ade pratama" name="tempat_lahir" value="{{$data->tempat_lahir}}">
+                                @if ($errors->has('tempat_lahir'))
+                                    <small><i>{{$errors->first('tempat_lahir')}}</i></small>
+                                @endif
+                              </div>
+                          </div>
+                          <div class="row" style="padding: 1%;">
+                              <div class="col-md-3">
+                                Tanggal Lahir
+                              </div>
+                              <div class="col-md-1">
+                                :
+                              </div>
+                              <div class="col-md-4">
+                                <input type="text" id="demo" class="form-control" placeholder="ex: wahyu ade pratama" name="tanggal_lahir">
+                                @if ($errors->has('tanggal_lahir'))
+                                    <small><i>{{$errors->first('tanggal_lahir')}}</i></small>
+                                @endif
+                              </div>
+                          </div>
+                                        <link href="{{ URL::asset('datepicker/dcalendar.picker.css')}}" rel="stylesheet">
+                                        <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+                                        <script src="{{ URL::asset('datepicker/dcalendar.picker.js')}}"></script>
+                                        <script>
+                                          $('#demo').dcalendarpicker();
+                                          $('#calendar-demo').dcalendar(); //creates the calendar
+                                        </script>
+
                           <div class="row" style="padding: 1%;">
                             <div class="col-md-3">
                                 Alamat

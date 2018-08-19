@@ -16,7 +16,7 @@ class CreateJenisInventarisTable extends Migration
         Schema::create('jenis_inventaris', function (Blueprint $table) {
             $table->increments('id_jenis');
             $table->string('nama_jenis');
-            $table->string('keterangan_jenis');
+            $table->string('keterangan_jenis')->nullable();
             $table->timestamps();
         });
     }

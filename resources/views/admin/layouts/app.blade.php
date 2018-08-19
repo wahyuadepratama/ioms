@@ -19,7 +19,13 @@
           <div class="sidebar-wrapper">
               <div class="logo">
                   <a href="/" class="simple-text">
-                      Welcome
+                      @if(Auth::user()->id_role == 1)
+                        {{Config::get('ioms.role.1')}}
+                      @elseif(Auth::user()->id_role == 2)
+                        {{Config::get('ioms.role.2')}}
+                      @elseif(Auth::user()->id_role == 1)
+                        {{Config::get('ioms.role.3')}}
+                      @endif
                   </a>
               </div>
               <ul class="nav">

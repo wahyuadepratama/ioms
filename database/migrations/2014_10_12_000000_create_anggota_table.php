@@ -20,6 +20,8 @@ class CreateAnggotaTable extends Migration
             $table->string('no_anggota')->unique()->nullable();
             $table->string('nama');
             $table->string('email')->unique();
+            $table->string('tempat_lahir')->nullable();
+            $table->date('tanggal_lahir')->nullable();
             $table->string('no_handphone')->nullable();
             $table->string('alamat')->nullable();
             $table->string('kutipan')->nullable();

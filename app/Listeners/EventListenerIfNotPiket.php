@@ -60,14 +60,17 @@ class EventListenerIfNotPiket
 
     protected function query($value){
 
-      $dt = Carbon::now()->toDateString()." 15:00:00";
+      $deadline = \Config::get('ioms.piket.harian.waktu-piket-terakhir');
+      $dendaMaksimal = \Config::get('ioms.piket.harian.denda-piket-maksimal');
+
+      $dt = Carbon::now()->toDateString()." ".$deadline;
       DB::statement("SET GLOBAL event_scheduler='ON' ");
       DB::unprepared("
         CREATE EVENT IF NOT EXISTS dendaPiket".$value."
           ON SCHEDULE AT '".$dt."'
         DO
           INSERT INTO piket_harian(id_pengurus_piket,keterangan,denda,created_at)
-          VALUES(".$value.", 'saya tidak piket hari ini', 15000, NOW());
+          VALUES(".$value.", 'saya tidak piket hari ini', ".$dendaMaksimal.", NOW());
       ");
       DB::unprepared("
         CREATE EVENT IF NOT EXISTS updateTotalDenda".$value."

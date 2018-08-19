@@ -9,11 +9,10 @@
             <div class="col-md-12">
                 <div class="card strpied-tabled-with-hover">
                     <div class="card-header ">
-                        <h4 class="card-title">Inventaris HMSI</h4>
-                        <p class="card-category">Daftar Inventaris HMSI</p>
+                        <h4 class="card-title">Daftar Inventaris HMSI</h4>
                     </div>
                     <div class="card-header">
-                      <a href="/inventaris/create" class="btn btn-info ">Tambah Inventaris</a>
+                      <a href="/inventaris/create" class="btn btn-info pull-right">Tambah Inventaris</a>
                     </div>
                     <div class="card-body">
                       <div class="card-body table-full-width table-responsive">
@@ -33,6 +32,7 @@
                                   <th>Kondisi</th>
                                   <th>Jumlah</th>
                                   <th>More</th>
+                                  <th>Peminjaman</th>
 
                               </thead>
                               <tbody>
@@ -82,7 +82,6 @@
                                                                   <td>
                                                                     <a href="/inventaris/delete/{{$data->id}}" class="btn btn-danger" style="margin-right: 2px;" >Delete</a>
                                                                     <a href="/inventaris/update/{{$data->id}}" class="btn btn-info" style="margin-right: 2px;">Update</a>
-                                                                    <a href="/inventaris/peminjaman/{{$data->id}}" class="btn btn-warning">Pinjam</a>
                                                                   </td>
                                                                 </tr>
                                                               </table>
@@ -93,6 +92,7 @@
                                             </div>
                                             <!--  End Modal -->
                                       </td>
+                                      <td><a href="/inventaris/peminjaman/{{$data->id}}" class="btn btn-danger">Pinjam</a></td>
                                   </tr>
                                   @php $no++; @endphp
                                 @endforeach

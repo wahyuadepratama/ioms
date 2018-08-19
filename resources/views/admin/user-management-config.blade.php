@@ -86,6 +86,28 @@
               </div>
             </div>
             @php } @endphp
+
+            <div class="col-md-4">
+              <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Ganti Role Anggota</h4>
+                </div>
+                <div class="card-body">
+                  <form action="/user-management/change-role/{{$anggota->id}}" method="post">
+                    <div class="row">
+                      <select class="form-control" name="role" style="margin-left:3%;margin-right:3%;margin-bottom:3%">
+                        <option value="none" selected>Pilih Role</option>                        
+                        <option value="2">Pengurus</option>
+                        <option value="3">Anggota</option>
+                      </select>
+                    </div>
+                    {{csrf_field()}}
+                    <button class="btn btn-danger btn-fill" href="">Ganti Role</button>&nbsp;
+                  </form>
+                </div>
+              </div>
+            </div>
+
         </div>
     </div>
 </div>

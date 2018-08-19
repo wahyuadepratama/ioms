@@ -22,6 +22,7 @@
                                   {{$data->nama}}
                                 </div>
                             </div>
+
                             <div class="row" style="padding: 1%;">
                                 <div class="col-md-3">
                                   NIM
@@ -33,6 +34,7 @@
                                   {{$data->nim}}
                                 </div>
                             </div>
+
                             <div class="row" style="padding: 1%;">
                                 <div class="col-md-3">
                                   No. Anggota
@@ -44,6 +46,7 @@
                                   {{$data->no_anggota}}
                                 </div>
                             </div>
+
                             <div class="row" style="padding: 1%;">
                                 <div class="col-md-3">
                                   Email
@@ -55,6 +58,7 @@
                                   {{$data->email}}
                                 </div>
                             </div>
+
                             <div class="row" style="padding: 1%;">
                                 <div class="col-md-3">
                                   No. Handphone
@@ -66,6 +70,21 @@
                                   {{$data->no_handphone}}
                                 </div>
                             </div>
+
+                            <div class="row" style="padding: 1%;">
+                                <div class="col-md-3">
+                                  Tempat / Tanggal Lahir
+                                </div>
+                                <div class="col-md-1">
+                                  :
+                                </div>
+                                <div class="col-md-8">
+                                  @if($data->tempat_lahir != NULL && $data->tanggal_lahir != NULL)
+                                  {{$data->tempat_lahir}} / {{$data->tanggal_lahir}}
+                                  @endif
+                                </div>
+                            </div>
+
                             <div class="row" style="padding: 1%;">
                               <div class="col-md-3">
                                   Alamat
@@ -77,7 +96,8 @@
                                   {{$data->alamat}}
                                 </div>
                             </div>
-                          <form action="profile/edit"><br>
+
+                          <form action="profile/edit" method="get"><br>
                               <button type="submit" class="btn btn-info btn-fill pull-right">Update Profile</button>
                               <div class="clearfix"></div>
                           </form>
@@ -94,7 +114,11 @@
                               </a>
                           </div>
                           <p class="description text-center">
+                            @if($data->kutipan != NULL)
                               <i>"{{$data->kutipan}}"</i>
+                            @else
+                              <i>Lengkapi Data Kamu!</i>
+                            @endif
                           </p>
                       </div>
                       <hr>

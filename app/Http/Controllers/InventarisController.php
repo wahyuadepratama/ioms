@@ -10,18 +10,19 @@ use Illuminate\Support\Facades\Validator;
 
 class InventarisController extends Controller
 {
-  public function __construct(){
+  public function __construct(){ //-------------------------------------------------------------------- construct()
       $this->middleware('auth');
+      $this->middleware('admin-pengurus');
   }
 
-  public function index(){
+  public function index(){ // -------------------------------------------------------------------- index()
     $inventaris = Inventaris::join('jenis_inventaris','jenis_inventaris.id_jenis','=','inventaris.id_jenis')
               ->select('inventaris.*','jenis_inventaris.*')
               ->get();
     return view('admin.inventaris',['inventaris'=>$inventaris]);
   }
 
-  public function validator(array $data){
+  public function validator(array $data){ // -------------------------------------------------------------------- validator($data)
       return Validator::make($data, [
           'nama' => 'required|string|max:191',
           'kondisi' => 'required|string',
@@ -29,12 +30,12 @@ class InventarisController extends Controller
       ]);
   }
 
-  public function create(){
+  public function create(){ // -------------------------------------------------------------------- create()
     $jenis = JenisInventaris::all();
     return view('admin.inventaris-add',['jenis'=>$jenis]);
   }
 
-  public function store(Request $request){
+  public function store(Request $request){ // -------------------------------------------------------------------- store($request)
     $this->validator($request->all())->validate();
     Inventaris::create([
         'nama' => $request->nama,
@@ -48,13 +49,13 @@ class InventarisController extends Controller
     return redirect('inventaris')->with('success','Inventaris Berhasil Ditambah!');
   }
 
-  public function update($id){
+  public function update($id){ // -------------------------------------------------------------------- update($id)
     $data = Inventaris::find($id);
     $jenis = JenisInventaris::all();
     return view('admin.inventaris-update',['data'=>$data, 'jenis'=>$jenis]);
   }
 
-  public function storeUpdate(Request $request){
+  public function storeUpdate(Request $request){ //-------------------------------------------------------------------- storeUpdate($request)
     $this->validator($request->all())->validate();
     $inventaris = Inventaris::find($request->id);
     $inventaris->nama = $request->nama;
@@ -66,13 +67,13 @@ class InventarisController extends Controller
     return redirect('inventaris')->with('success','Inventaris Berhasil Diubah!');
   }
 
-  public function delete($id){
+  public function delete($id){ // -------------------------------------------------------------------- delete($id)
     $inventaris = Inventaris::find($id);
     $inventaris->delete();
     return redirect('inventaris')->with('success','Inventaris Berhasil Dihapus!');
   }
 
-  public function storeJenis(Request $request){
+  public function storeJenis(Request $request){ //-------------------------------------------------------------------- storeJenis($request)
     JenisInventaris::create([
         'nama_jenis' => $request->nama_jenis,
         'keterangan_jenis' => $request->keterangan_jenis,
@@ -81,7 +82,7 @@ class InventarisController extends Controller
     return redirect('inventaris/create')->with('success','Jenis Inventaris Berhasil Ditambah!');
   }
 
-  public function deleteJenis($id){
+  public function deleteJenis($id){ //-------------------------------------------------------------------- deleteJenis($id)
     $jenis = JenisInventaris::where('id_jenis',$id);
     $jenis->delete();
     return redirect('inventaris/create')->with('success','Jenis Inventaris Berhasil Dihapus!');
