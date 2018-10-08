@@ -37,13 +37,13 @@ class LoginController extends Controller
        request()->merge([$field => $login]);
        return $field;
     }
-
-    protected function validateLogin(Request $request)
-    {
-        $this->validate($request, [
-            $this->username() => 'required|string|min:6',
-            'password' => 'required|string',
-        ]);
-    }
+    // 
+    // protected function validateLogin(Request $request)
+    // {
+    //     $this->validate($request, [
+    //         $this->username() => 'required|string|min:6',
+    //         'password' => 'required|string',
+    //     ]);
+    // }
 
 }

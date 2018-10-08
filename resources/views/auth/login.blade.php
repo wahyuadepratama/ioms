@@ -13,17 +13,11 @@
                     <form class="form-horizontal" method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }}
 
-                        <div class="form-group{{ $errors->has('identity') ? ' has-error' : '' }}">
+                        <div class="form-group">
                             <label for="identity" class="col-md-4 control-label">E-Mail or NIM</label>
 
                             <div class="col-md-6">
                                 <input id="identity" type="text" class="form-control" name="identity" value="{{ old('identity') }}" required autofocus>
-
-                                @if ($errors->has('identity'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('identity') }}</strong>
-                                    </span>
-                                @endif
                             </div>
                         </div>
 
@@ -33,9 +27,9 @@
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control" name="password" required>
 
-                                @if ($errors->has('password'))
+                                @if ($errors->has('nim'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
+                                        <small>{{ $errors->first('nim') }}</small>
                                     </span>
                                 @endif
                             </div>

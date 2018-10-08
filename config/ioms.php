@@ -9,21 +9,13 @@ return[
   ],
   'piket' => [
     'harian' => [
-      //Untuk EventListenerNotPiket.php ---------------------
-      'waktu-piket-terakhir' => '15.00.00',
-      'denda-piket-maksimal' => '15000',
-        //Untuk PiketHarianController.php ---------------------
-      'jam-mulai-piket' => 9, //satuan jam
-      'menit-tambahan-mulai-piket' => 15, //satuan menit
+      // //Untuk EventListenerNotPiket.php ---------------------
+      'waktu-absen-sore' => '18.00.00',
+      'waktu-absen-pagi' => '12.00.00',
 
-      'denda-on-time' => 0, //satuan rupiah
-      'denda-satu-jam' => 2000, //satuan rupiah
-      'denda-dua-jam' => 4000, //satuan rupiah
-      'denda-tiga-jam' => 6000, //satuan rupiah
-      'denda-empat-jam' => 8000, //satuan rupiah
-      'denda-lima-jam' => 10000, //satuan rupiah
-      'denda-enam-jam' => 15000, //satuan rupiah
-      'denda-diatas-enam-jam' => 15000 //satuan rupiah
+      'denda-pagi' => 5000,
+      'denda-sore' => 5000,
+      'denda-pagi-sore' => 15000
     ]
   ],
   'dashboard' => [

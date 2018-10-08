@@ -22,6 +22,13 @@
       <!-- particles.js container -->
       <div id="particles-js"></div>
 
+      <style media="screen">
+        canvas.particles-js-canvas-el{
+          height: 100vh !important;
+          width:100vw !important;
+        }
+      </style>
+
       <div style="position: fixed;top: 0;left: 0;width: 100%;height: 100%;z-index:99; margin-top:5%;">
         @yield('content')
       </div>

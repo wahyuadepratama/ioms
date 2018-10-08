@@ -109,7 +109,7 @@
                       <div class="card-body">
                           <div class="author">
                               <a href="#">
-                                  <img class="avatar border-gray" src="{{ asset('storage/avatar/'.$data->avatar) }}" alt="...">
+                                  <img class="avatar border-gray" src="{{ asset('images/avatar/'.$data->avatar) }}" alt="...">
                                   <h5 class="title">{{$data->nama}}</h5>
                               </a>
                           </div>

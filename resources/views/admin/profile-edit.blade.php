@@ -46,7 +46,10 @@
                                 :
                               </div>
                               <div class="col-md-8">
-                                {{$data->email}}
+                                <input type="text" class="form-control" placeholder="ex: wahyu ade pratama" name="email" value="{{$data->email}}">
+                                @if ($errors->has('email'))
+                                    <small><i>{{$errors->first('email')}}</i></small>
+                                @endif
                               </div>
                           </div>
                           <div class="row" style="padding: 1%;">
@@ -159,7 +162,7 @@
                     <div class="card-body">
                         <div class="author">
                             <a href="#">
-                                <img class="avatar border-gray" src="{{ asset('storage/avatar/'.$data->avatar) }}" alt="...">
+                                <img class="avatar border-gray" src="{{ asset('images/avatar/'.$data->avatar) }}" alt="...">
                                 <h5 class="title">{{$data->nama}}</h5>
                             </a>
                         </div>

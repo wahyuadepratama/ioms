@@ -49,20 +49,14 @@
                       </a>
                   </li>
                   @endif
-                  @if(Auth::user()->id_role == 2)
+                  <!-- @if(Auth::user()->id_role == 2)
                   <li class="nav-item {{ Request::is('piket-harian') ? 'active' : '' }}">
                       <a class="nav-link" href="/piket-harian">
                           <i class="nc-icon nc-tap-01"></i>
                           <p>Absen Piket Harian</p>
                       </a>
                   </li>
-                  <li class="nav-item {{ Request::is('piket-blog') ? 'active' : '' }}">
-                      <a class="nav-link" href="/piket-blog">
-                          <i class="nc-icon nc-globe-2"></i>
-                          <p>Piket Blog</p>
-                      </a>
-                  </li>
-                  @endif
+                  @endif -->
                   <li class="nav-item {{ Request::is('anggota-hmsi') ? 'active' : '' }}">
                       <a class="nav-link" href="/anggota-hmsi">
                           <i class="nc-icon nc-single-copy-04"></i>

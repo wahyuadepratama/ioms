@@ -59,9 +59,6 @@ class AdminController extends Controller
       PengurusPiket::where('id_anggota', $request->id)->update([
                         'jadwal_piket' => $request->jadwal_piket,
                       ]);
-      PiketBulanan::where('id_anggota', $request->id)->update([
-                        'jadwal_posting' => $request->jadwal_posting,
-                      ]);
       return redirect('user-management')->with('success','Kamu Berhasil Mengubah Jadwal Piket');
     }
 

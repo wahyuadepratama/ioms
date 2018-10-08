@@ -39,23 +39,41 @@ class AnggotaController extends Controller
       ]);
   }
 
+  public function validatorEmail(array $data)
+  {
+    return Validator::make($data, [
+        'email' => 'required|string|email|max:191|unique:anggota',
+    ]);
+  }
+
   public function store(Request $request){ // ---------------------------------------- store($request)
+
     if($request->tanggal_lahir){
       $time = $request->tanggal_lahir;
       $date = Carbon::createFromFormat('d/m/Y', $time)->format('Y-d-m');
     }else{
       $date = NULL;
     }
-    $this->validator($request->all())->validate();
+
+    $getEmailAnggota = Anggota::where("email",$request->email)->where("id",Auth::user()->id)->first();
+    if($getEmailAnggota){
+      $this->validator($request->all())->validate();
+    }else{
+      $this->validatorEmail($request->all())->validate();
+    }
+
     if($request->avatar){
       $avatar = Auth::user()->nim.'.jpg';
-      $request->file('avatar')->storeAs('public/avatar', $avatar);
+      // $request->file('avatar')->storeAs('public/images/avatar', $avatar);
+      $request->file('avatar')->move(public_path().'/images/avatar', $avatar);
+
       Anggota::where('id',Auth::user()->id)->update(['avatar'=>$avatar]);
     }
 
     Anggota::where('id', Auth::user()->id)
             ->update([
                       'nama' => $request->nama,
+                      'email' => $request->email,
                       'no_anggota' => $request->no_anggota,
                       'no_handphone' => $request->no_handphone,
                       'alamat' => $request->alamat,

@@ -35,34 +35,7 @@
                                 </select>
                               </div>
                           </div>
-                          @endforeach
-                          @foreach($piketBulanan as $data2)
-                          <div class="row" style="padding: 1%;">
-                              <div class="col-md-3">
-                                Jadwal Piket Bulanan
-                              </div>
-                              <div class="col-md-1">
-                                :
-                              </div>
-                              <div class="col-md-8">
-                                <select class="form-control" name="jadwal_posting">
-                                  <option value="{{$data2->jadwal_posting}}" selected>{{$data2->jadwal_posting}}</option>
-                                  <option value="January">January</option>
-                                  <option value="February">February</option>
-                                  <option value="March">March</option>
-                                  <option value="April">April</option>
-                                  <option value="May">May</option>
-                                  <option value="June">June</option>
-                                  <option value="July">July</option>
-                                  <option value="August">August</option>
-                                  <option value="September">September</option>
-                                  <option value="October">October</option>
-                                  <option value="November">November</option>
-                                  <option value="December">December</option>
-                                </select>
-                              </div>
-                          </div>
-                          @endforeach
+                          @endforeach                          
                             {{csrf_field()}}<br>
                             <button type="submit" class="btn btn-info btn-fill  ">Simpan Perubahan</button>
                             <a class="btn btn-danger btn-fill" href="/user-management/reset-password/{{$anggota->id}}">Reset Password</a>&nbsp;
@@ -96,7 +69,7 @@
                   <form action="/user-management/change-role/{{$anggota->id}}" method="post">
                     <div class="row">
                       <select class="form-control" name="role" style="margin-left:3%;margin-right:3%;margin-bottom:3%">
-                        <option value="none" selected>Pilih Role</option>                        
+                        <option value="none" selected>Pilih Role</option>
                         <option value="2">Pengurus</option>
                         <option value="3">Anggota</option>
                       </select>
