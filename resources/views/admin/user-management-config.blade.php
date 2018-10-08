@@ -35,7 +35,18 @@
                                 </select>
                               </div>
                           </div>
-                          @endforeach                          
+                          <div class="row" style="padding: 1%;">
+                              <div class="col-md-3">
+                                Denda Piket
+                              </div>
+                              <div class="col-md-1">
+                                :
+                              </div>
+                              <div class="col-md-8">
+                                <input type="number" name="denda" value="{{ $data1->total_denda }}" class="form-control">
+                              </div>
+                         </div>
+                         @endforeach
                             {{csrf_field()}}<br>
                             <button type="submit" class="btn btn-info btn-fill  ">Simpan Perubahan</button>
                             <a class="btn btn-danger btn-fill" href="/user-management/reset-password/{{$anggota->id}}">Reset Password</a>&nbsp;

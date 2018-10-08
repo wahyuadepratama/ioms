@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\PengurusPiket;
-use App\PiketBulanan;
 use App\Anggota;
 use App\Role;
 use Illuminate\Http\Request;
@@ -43,10 +42,7 @@ class AdminController extends Controller
           $piketHarian = PengurusPiket::select('pengurus_piket.*')
                       ->where('pengurus_piket.id_anggota','=',$id)
                       ->get();
-          $piketBulanan = PiketBulanan::select('piket_bulanan.*')
-                      ->where('piket_bulanan.id_anggota','=',$id)
-                      ->get();
-          return view('admin/user-management-config', ['piketHarian' => $piketHarian, 'piketBulanan' => $piketBulanan, 'anggota' => $cek]);
+          return view('admin/user-management-config', ['piketHarian' => $piketHarian, 'anggota' => $cek]);
         }else if($cek->id_role == 3){
           return view('admin/user-management-config', ['anggota' => $cek]);
         }
@@ -58,6 +54,7 @@ class AdminController extends Controller
     public function storeJadwalPiket(Request $request){ //----------------------------------------------------------------- storeJadwalPiket($request)
       PengurusPiket::where('id_anggota', $request->id)->update([
                         'jadwal_piket' => $request->jadwal_piket,
+                        'total_denda' => $request->denda,
                       ]);
       return redirect('user-management')->with('success','Kamu Berhasil Mengubah Jadwal Piket');
     }
