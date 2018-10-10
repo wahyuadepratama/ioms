@@ -76,7 +76,16 @@ class ApiUserController extends Controller
         }
 
         foreach($allPiketToday as $piket){
-          $this->createEventPagiSore($piket->id);
+          $dataPiketHarian = PiketHarian::where('id_pengurus_piket',$piket->id)->get();
+          $runEvent = "true";
+          foreach($dataPiketHarian as $key){
+            if($key->created_at->toDateString() == Carbon::now()->setTimezone('Asia/Jakarta')->toDateString()){
+              $runEvent = "false";
+            }
+          }
+          if($runEvent == "true"){
+            $this->createEventPagiSore($piket->id_anggota);
+          }
         }
 
         if($allPiketHarianById == NULL){
@@ -90,7 +99,7 @@ class ApiUserController extends Controller
 
         if($allPiketHarianById != NULL){
 
-          $this->destroyEvent($getUser->id);
+          $this->destroyEvent($getUser->id_anggota);
 
           $found = 'false';
           foreach ($allPiketHarianById as $x){
@@ -110,7 +119,7 @@ class ApiUserController extends Controller
 
           foreach ($allPiketHarianById as $x){
             if($x->created_at->toDateString() == Carbon::now()->setTimezone('Asia/Jakarta')->toDateString()){
-              if($date->hour <= 12 && $date->hour >= 8){
+              if($date->hour <= 11 && $date->hour >= 7){
                 if($x->piket_pagi == NULL){
                   $dendaNow = $x->denda - 10000;
                   $x->denda = $dendaNow;
@@ -200,7 +209,7 @@ class ApiUserController extends Controller
     public function destroyEvent($id)
     {
       DB::unprepared("DROP EVENT IF EXISTS eventPagiSore".$id);
-      DB::unprepared("DROP EVENT IF EXISTS updateTotalDenda".$id);
+      // DB::unprepared("DROP EVENT IF EXISTS updateTotalDenda".$id);
     }
 
     public function updateTotalDenda($denda,$id_user)
@@ -212,6 +221,6 @@ class ApiUserController extends Controller
 
     public function tesaja()
     {
-      return "tes api";
+      return $getUser = PengurusPiket::where("id_anggota",3)->first();
     }
 }

@@ -14,17 +14,13 @@
                     <div class="card-body">
                       <form action="/user-management/config/store" method="post">
                         <input type="hidden" name="id" value="{{$anggota->id}}">
-                          @foreach($piketHarian as $data1)
                           <div class="row" style="padding: 1%;">
                               <div class="col-md-3">
                                 Jadwal Piket Harian
                               </div>
-                              <div class="col-md-1">
-                                :
-                              </div>
                               <div class="col-md-8">
                                 <select class="form-control" name="jadwal_piket">
-                                  <option value="{{$data1->jadwal_piket}}" selected>{{$data1->jadwal_piket}}</option>
+                                  <option value="{{$piketHarian->jadwal_piket}}" selected>{{$piketHarian->jadwal_piket}}</option>
                                   <option value="Monday">Monday</option>
                                   <option value="Tuesday">Tuesday</option>
                                   <option value="Wednesday">Wednesday</option>
@@ -37,16 +33,37 @@
                           </div>
                           <div class="row" style="padding: 1%;">
                               <div class="col-md-3">
-                                Denda Piket
-                              </div>
-                              <div class="col-md-1">
-                                :
+                                Total Tenda
                               </div>
                               <div class="col-md-8">
-                                <input type="number" name="denda" value="{{ $data1->total_denda }}" class="form-control">
+                                &nbsp;&nbsp; Rp. {{ $akumulasi }}
                               </div>
-                         </div>
-                         @endforeach
+                          </div>
+                          <div class="row" style="padding: 1%;">
+                              <div class="col-md-3">
+                                Denda Piket Harian
+                              </div>
+                              <div class="col-md-8">
+                                &nbsp;&nbsp; Rp. {{ $piketHarian->total_denda }}
+                              </div>
+                          </div>
+                          <div class="row" style="padding: 1%;">
+                              <div class="col-md-3">
+                                Denda Lain
+                              </div>
+                              <div class="col-md-8">
+                                <input type="number" name="denda_lain" value="{{ $piketHarian->denda_lain }}" class="form-control">
+                                <small><i>*Akumulasikan total denda lama + total denda baru untuk mengisi field ini</i></small>
+                              </div>
+                          </div>
+                          <div class="row" style="padding: 1%;">
+                              <div class="col-md-3">
+                                Sudah Dibayar
+                              </div>
+                              <div class="col-md-8">
+                                <input type="number" name="sudah_dibayar" value="{{ $piketHarian->sudah_dibayar }}" class="form-control">
+                              </div>
+                          </div>
                             {{csrf_field()}}<br>
                             <button type="submit" class="btn btn-info btn-fill  ">Simpan Perubahan</button>
                             <a class="btn btn-danger btn-fill" href="/user-management/reset-password/{{$anggota->id}}">Reset Password</a>&nbsp;

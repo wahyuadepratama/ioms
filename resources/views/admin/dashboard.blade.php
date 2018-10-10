@@ -41,7 +41,7 @@
       dataPoints: [
         @php $x=1; @endphp
         @foreach($piketHarian as $data)
-  			{ x: {{$x}}, y: {{$data->total_denda}}, label:"{{$data->nama}}"},
+  			{ x: {{$x}}, y: @php $akumulasi = ($data->total_denda + $data->denda_lain) - $data->sudah_dibayar; echo $akumulasi; @endphp, label:"{{$data->nama}}"},
         @php $x++; @endphp
         @endforeach
   		]

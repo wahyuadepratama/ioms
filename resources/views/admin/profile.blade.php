@@ -13,34 +13,25 @@
                       <div class="card-body">
                             <div class="row" style="padding: 1%;">
                                 <div class="col-md-3">
-                                  Nama
-                                </div>
-                                <div class="col-md-1">
-                                  :
+                                  <b>Nama</b>
                                 </div>
                                 <div class="col-md-8">
-                                  {{$data->nama}}
+                                  &nbsp;&nbsp;{{$data->nama}}
                                 </div>
                             </div>
 
                             <div class="row" style="padding: 1%;">
                                 <div class="col-md-3">
-                                  NIM
-                                </div>
-                                <div class="col-md-1">
-                                  :
+                                  <b>NIM</b>
                                 </div>
                                 <div class="col-md-8">
-                                  {{$data->nim}}
+                                  &nbsp;&nbsp;{{$data->nim}}
                                 </div>
                             </div>
 
                             <div class="row" style="padding: 1%;">
                                 <div class="col-md-3">
-                                  No. Anggota
-                                </div>
-                                <div class="col-md-1">
-                                  :
+                                  <b>No. Anggota</b>
                                 </div>
                                 <div class="col-md-8">
                                   {{$data->no_anggota}}
@@ -49,22 +40,16 @@
 
                             <div class="row" style="padding: 1%;">
                                 <div class="col-md-3">
-                                  Email
-                                </div>
-                                <div class="col-md-1">
-                                  :
+                                  <b>Email</b>
                                 </div>
                                 <div class="col-md-8">
-                                  {{$data->email}}
+                                  &nbsp;&nbsp;{{$data->email}}
                                 </div>
                             </div>
 
                             <div class="row" style="padding: 1%;">
                                 <div class="col-md-3">
-                                  No. Handphone
-                                </div>
-                                <div class="col-md-1">
-                                  :
+                                  <b>No. Handphone</b>
                                 </div>
                                 <div class="col-md-8">
                                   {{$data->no_handphone}}
@@ -73,10 +58,7 @@
 
                             <div class="row" style="padding: 1%;">
                                 <div class="col-md-3">
-                                  Tempat / Tanggal Lahir
-                                </div>
-                                <div class="col-md-1">
-                                  :
+                                  <b>Tempat / Tanggal Lahir</b>
                                 </div>
                                 <div class="col-md-8">
                                   @if($data->tempat_lahir != NULL && $data->tanggal_lahir != NULL)
@@ -87,10 +69,7 @@
 
                             <div class="row" style="padding: 1%;">
                               <div class="col-md-3">
-                                  Alamat
-                                </div>
-                                <div class="col-md-1">
-                                  :
+                                  <b>Alamat</b>
                                 </div>
                                 <div class="col-md-8">
                                   {{$data->alamat}}

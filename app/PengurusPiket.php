@@ -9,6 +9,6 @@ class PengurusPiket extends Model
     protected $table = 'pengurus_piket';
 
     protected $fillable = [
-      'jadwal_piket','total_denda','created_at','updated_at'
+      'id_anggota','jadwal_piket','total_denda','created_at','updated_at','denda_lain','sudah_dibayar'
     ];
 }

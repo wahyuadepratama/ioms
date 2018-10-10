@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\PengurusPiket;
 use App\Anggota;
 use App\Role;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -41,8 +42,9 @@ class AdminController extends Controller
         if($cek->id_role == 2){
           $piketHarian = PengurusPiket::select('pengurus_piket.*')
                       ->where('pengurus_piket.id_anggota','=',$id)
-                      ->get();
-          return view('admin/user-management-config', ['piketHarian' => $piketHarian, 'anggota' => $cek]);
+                      ->first();
+          $akumulasi = ($piketHarian->total_denda + $piketHarian->denda_lain) - $piketHarian->sudah_dibayar;
+          return view('admin/user-management-config', ['piketHarian' => $piketHarian, 'anggota' => $cek, 'akumulasi' => $akumulasi]);
         }else if($cek->id_role == 3){
           return view('admin/user-management-config', ['anggota' => $cek]);
         }
@@ -54,7 +56,8 @@ class AdminController extends Controller
     public function storeJadwalPiket(Request $request){ //----------------------------------------------------------------- storeJadwalPiket($request)
       PengurusPiket::where('id_anggota', $request->id)->update([
                         'jadwal_piket' => $request->jadwal_piket,
-                        'total_denda' => $request->denda,
+                        'denda_lain' => $request->denda_lain,
+                        'sudah_dibayar' => $request->sudah_dibayar
                       ]);
       return redirect('user-management')->with('success','Kamu Berhasil Mengubah Jadwal Piket');
     }
@@ -73,6 +76,19 @@ class AdminController extends Controller
         Anggota::where('id', $id)->update([
           'id_role' => $request->role,
         ]);
+
+        if($request->role == 2){
+          PengurusPiket::create([
+              'id_anggota' => $id,
+              'jadwal_piket' => "Sunday",
+              'total_denda' => 0,
+              'created_at' => Carbon::now()->setTimezone('Asia/Jakarta'),
+          ]);
+        }
+        if($request->role == 3){
+          $user = PengurusPiket::where('id_anggota',$id)->first();
+          $user->delete();
+        }
         return redirect('user-management')->with('success','Kamu Berhasil Mengganti Role User');
       }
     }

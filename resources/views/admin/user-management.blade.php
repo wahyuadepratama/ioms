@@ -50,7 +50,7 @@
                                                             <div class="card-body">
                                                                 <div class="author">
                                                                     <a href="#">
-                                                                        <img class="avatar border-gray" src="/storage/avatar/{{$data->avatar}}" alt="...">
+                                                                        <img class="avatar border-gray" src="/images/avatar/{{$data->avatar}}" alt="...">
                                                                         <h5 class="title">{{$data->no_anggota}}</h5>
                                                                     </a>
                                                                     <p class="description">
@@ -65,15 +65,13 @@
                                                                     <p class="description">
                                                                       <i>{{$data->kutipan}}</i>
                                                                     </p>
+                                                                    <p class="description">
+                                                                      Account Created : {{$data->created_at}}
+                                                                    </p>
+                                                                    <p class="description">
+                                                                      Account Updated : {{$data->updated_at}}
+                                                                    </p>
                                                                 </div>
-                                                                <p class="description text-center">
-                                                                    <ul>
-                                                                      <small>Account Created : {{$data->created_at}}</small>
-                                                                    </ul>
-                                                                    <ul>
-                                                                      <small>Account Updated : {{$data->updated_at}}</small>
-                                                                    </ul>
-                                                                </p>
                                                             </div>
                                                         </div>
                                                     </div>

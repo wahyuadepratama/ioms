@@ -42,7 +42,7 @@ class DashboardController extends Controller
 
     $piketHarian = PengurusPiket::join('anggota','anggota.id','=','pengurus_piket.id_anggota')
           ->where('anggota.id_role','=',2)
-          ->where('pengurus_piket.total_denda','!=',0)
+          ->where('pengurus_piket.total_denda','!=', NULL)
           ->get();
 
     return view('admin/dashboard',[

@@ -17,9 +17,6 @@
                               <div class="col-md-3">
                                 Nama
                               </div>
-                              <div class="col-md-1">
-                                :
-                              </div>
                               <div class="col-md-8">
                                 <input type="text" class="form-control" placeholder="ex: wahyu ade pratama" name="nama" value="{{$data->nama}}">
                                 @if ($errors->has('nama'))
@@ -31,9 +28,6 @@
                               <div class="col-md-3">
                                 NIM
                               </div>
-                              <div class="col-md-1">
-                                :
-                              </div>
                               <div class="col-md-8">
                                 {{$data->nim}}
                               </div>
@@ -41,9 +35,6 @@
                           <div class="row" style="padding: 1%;">
                               <div class="col-md-3">
                                 Email
-                              </div>
-                              <div class="col-md-1">
-                                :
                               </div>
                               <div class="col-md-8">
                                 <input type="text" class="form-control" placeholder="ex: wahyu ade pratama" name="email" value="{{$data->email}}">
@@ -56,9 +47,6 @@
                               <div class="col-md-3">
                                 No. Anggota
                               </div>
-                              <div class="col-md-1">
-                                :
-                              </div>
                               <div class="col-md-4">
                                 <input type="text" class="form-control" placeholder="ex: SI06 AB-001" name="no_anggota" value="{{$data->no_anggota}}">
                                 @if ($errors->has('no_anggota'))
@@ -70,9 +58,6 @@
                               <div class="col-md-3">
                                 No. Handphone
                               </div>
-                              <div class="col-md-1">
-                                :
-                              </div>
                               <div class="col-md-4">
                                 <input type="text" class="form-control" placeholder="ex: 08123456789" name="no_handphone" value="{{$data->no_handphone}}">
                               </div>
@@ -80,9 +65,6 @@
                           <div class="row" style="padding: 1%;">
                               <div class="col-md-3">
                                 Tempat Lahir
-                              </div>
-                              <div class="col-md-1">
-                                :
                               </div>
                               <div class="col-md-8">
                                 <input type="text" class="form-control" placeholder="ex: wahyu ade pratama" name="tempat_lahir" value="{{$data->tempat_lahir}}">
@@ -94,9 +76,6 @@
                           <div class="row" style="padding: 1%;">
                               <div class="col-md-3">
                                 Tanggal Lahir
-                              </div>
-                              <div class="col-md-1">
-                                :
                               </div>
                               <div class="col-md-4">
                                 <input type="text" id="demo" class="form-control" placeholder="ex: wahyu ade pratama" name="tanggal_lahir">
@@ -117,9 +96,6 @@
                             <div class="col-md-3">
                                 Alamat
                               </div>
-                              <div class="col-md-1">
-                                :
-                              </div>
                               <div class="col-md-8">
                                 <input type="text" class="form-control" placeholder="ex: sekreteariat HMSI" name="alamat" value="{{$data->alamat}}">
                               </div>
@@ -128,9 +104,6 @@
                             <div class="col-md-3">
                                 Kutipan
                               </div>
-                              <div class="col-md-1">
-                                :
-                              </div>
                               <div class="col-md-8">
                                 <input type="text" class="form-control" placeholder="ex: 'Hidup itu indah, jadi jalani saja'" name="kutipan" value="{{$data->kutipan}}">
                               </div>
@@ -138,9 +111,6 @@
                           <div class="row" style="padding: 1%;">
                               <div class="col-md-3">
                                 Avatar
-                              </div>
-                              <div class="col-md-1">
-                                :
                               </div>
                               <div class="col-md-8">
                                 <input type="file" name="avatar" ><br>
