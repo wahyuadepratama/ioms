@@ -119,7 +119,7 @@ class ApiUserController extends Controller
 
           foreach ($allPiketHarianById as $x){
             if($x->created_at->toDateString() == Carbon::now()->setTimezone('Asia/Jakarta')->toDateString()){
-              if($date->hour <= 11 && $date->hour >= 7){
+              if($date->hour <= 12 && $date->hour >= 8){
                 if($x->piket_pagi == NULL){
                   $dendaNow = $x->denda - 10000;
                   $x->denda = $dendaNow;
