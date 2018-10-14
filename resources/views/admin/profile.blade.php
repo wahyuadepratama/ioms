@@ -76,6 +76,17 @@
                                 </div>
                             </div>
 
+                            @if(Auth::user()->id_role == 2)
+                            <div class="row" style="padding: 1%;">
+                              <div class="col-md-3">
+                                  <b>Total Denda</b>
+                                </div>
+                                <div class="col-md-8">
+                                  Rp.{{$denda}}
+                                </div>
+                            </div>
+                            @endif
+
                           <form action="profile/edit" method="get"><br>
                               <button type="submit" class="btn btn-info btn-fill pull-right">Update Profile</button>
                               <div class="clearfix"></div>

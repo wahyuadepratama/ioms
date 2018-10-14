@@ -57,6 +57,7 @@ class ApiUserController extends Controller
         ]);
       }else{
         $allPiketHarianById = PiketHarian::where("id_pengurus_piket",$getUser->id)->get();
+
       }
 
       if($getUser->jadwal_piket != $today){ // tidak piket hari ini
@@ -68,7 +69,7 @@ class ApiUserController extends Controller
 
       if($getUser->jadwal_piket == $today){
 
-        if($date->hour < 8 | $date->hour > 17){
+        if($date->hour < 7 | $date->hour > 19){
           return response()->json([
             'error' => 'false',
             'error_msg'=>'Saat ini bukan periode pengambilan absen!'
@@ -84,9 +85,11 @@ class ApiUserController extends Controller
             }
           }
           if($runEvent == "true"){
-            $this->createEventPagiSore($piket->id_anggota);
+            $this->createEventPagiSore($piket->id);
           }
         }
+
+        $allPiketHarianById = PiketHarian::where("id_pengurus_piket",$getUser->id)->get();
 
         if($allPiketHarianById == NULL){
           PiketHarian::create([
@@ -98,8 +101,6 @@ class ApiUserController extends Controller
         }
 
         if($allPiketHarianById != NULL){
-
-          $this->destroyEvent($getUser->id_anggota);
 
           $found = 'false';
           foreach ($allPiketHarianById as $x){
@@ -119,13 +120,13 @@ class ApiUserController extends Controller
 
           foreach ($allPiketHarianById as $x){
             if($x->created_at->toDateString() == Carbon::now()->setTimezone('Asia/Jakarta')->toDateString()){
-              if($date->hour <= 12 && $date->hour >= 8){
+              if($date->hour <= 13 && $date->hour >= 7){
                 if($x->piket_pagi == NULL){
                   $dendaNow = $x->denda - 10000;
                   $x->denda = $dendaNow;
                   $x->piket_pagi = "true";
                   $x->save();
-                  $this->updateTotalDenda($dendaNow,$request->id_user);
+                  $this->updateTotalDenda($dendaNow,$request->today);
 
                   return response()->json([
                     'error' => 'false',
@@ -139,13 +140,13 @@ class ApiUserController extends Controller
                   ]);
                 }
               }
-              elseif($date->hour > 12 && $date->hour < 15){
+              elseif($date->hour > 13 && $date->hour < 15){
                 return response()->json([
                   'error' => 'false',
                   'error_msg'=>'Maaf, absen pagi sudah tidak bisa diambil!'
                 ]);
               }
-              elseif($date->hour >= 15 && $date->hour < 18){
+              elseif($date->hour >= 15 && $date->hour < 19){
                 if($x->piket_sore == NULL){
                   if($x->piket_pagi == "true"){
                     $dendaNow = $x->denda - 5000;
@@ -155,7 +156,7 @@ class ApiUserController extends Controller
                   $x->denda = $dendaNow;
                   $x->piket_sore = "true";
                   $x->save();
-                  $this->updateTotalDenda($dendaNow,$request->id_user);
+                  $this->updateTotalDenda($dendaNow,$request->today);
 
                   return response()->json([
                     'error' => 'false',
@@ -187,40 +188,36 @@ class ApiUserController extends Controller
       $deadline = \Config::get('ioms.piket.harian.waktu-absen-sore');
       $dendaMaksimal = \Config::get('ioms.piket.harian.denda-pagi-sore');
 
-      $dt = Carbon::now()->setTimezone('Asia/Jakarta')->toDateString()." ".$deadline;
-      DB::statement("SET GLOBAL event_scheduler='ON' ");
-      DB::unprepared("
-        CREATE EVENT IF NOT EXISTS eventPagiSore".$id_user."
-          ON SCHEDULE AT '".$dt."'
-        DO
-          INSERT INTO piket_harian(id_pengurus_piket,keterangan,denda,created_at)
-          VALUES(".$id_user.", 'saya tidak piket hari ini', ".$dendaMaksimal.", NOW());
-      ");
-      DB::unprepared("
-        CREATE EVENT IF NOT EXISTS updateTotalDenda".$id_user."
-          ON SCHEDULE AT '".$dt."'
-        DO
+      PiketHarian::create([
+          'id_pengurus_piket' => $id_user,
+          'denda' => $dendaMaksimal,
+          'created_at' => Carbon::now()->setTimezone('Asia/Jakarta'),
+      ]);
+    }
+
+    public function updateTotalDenda($denda,$today)
+    {
+      $user = PengurusPiket::where('jadwal_piket',$today)->get();
+
+      foreach($user as $getUser){
+        DB::unprepared("
           UPDATE pengurus_piket
-          SET total_denda = (SELECT SUM(piket_harian.denda) FROM piket_harian WHERE id_pengurus_piket = ".$id_user."), updated_at = now()
-          WHERE id = ".$id_user.";
-      ");
-    }
-
-    public function destroyEvent($id)
-    {
-      DB::unprepared("DROP EVENT IF EXISTS eventPagiSore".$id);
-      // DB::unprepared("DROP EVENT IF EXISTS updateTotalDenda".$id);
-    }
-
-    public function updateTotalDenda($denda,$id_user)
-    {
-      $getUser = PengurusPiket::where("id_anggota",(int)$id_user)->first();
-      $getUser->total_denda = $getUser->total_denda + $denda;
-      $getUser->save();
+          SET total_denda = (SELECT SUM(piket_harian.denda) FROM piket_harian WHERE id_pengurus_piket = ".$getUser->id."), updated_at = now()
+          WHERE id = ".$getUser->id
+        );
+      }
     }
 
     public function tesaja()
     {
-      return $getUser = PengurusPiket::where("id_anggota",3)->first();
+      date_default_timezone_set('Asia/Jakarta');
+      $target =  mktime(17, 0, 0, 10, 14, 2018);
+      $today = time();
+      $difference =($target-$today) ;
+      $days =(int) ($difference/60) ;
+      // return date('F jS, Y g:i:s a', $target);
+      // return $days;
+      $piketHarian = PengurusPiket::where('id_anggota',2)->first();
+      return $piketHarian->id;
     }
 }

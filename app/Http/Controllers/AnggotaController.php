@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
-use App\Anggota;
 use App\Role;
+use App\Anggota;
+use Carbon\Carbon;
+use App\PengurusPiket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -20,7 +21,13 @@ class AnggotaController extends Controller
               ->select('roles.*','anggota.*')
               ->where('anggota.id','=', Auth::user()->id)
               ->get();
-    return view('admin.profile',['anggota'=>$anggota]);
+    if(Auth::user()->id_role == 2){
+      $data = PengurusPiket::where('id_anggota',Auth::user()->id)->first();
+      $denda = ($data->denda_lain + $data->total_denda) - $data->sudah_dibayar;
+    }else{
+      $denda = 0;
+    }
+    return view('admin.profile',['anggota'=>$anggota,'denda'=>$denda]);
   }
 
   public function edit(){ // ---------------------------------------- edit()
@@ -65,7 +72,7 @@ class AnggotaController extends Controller
     if($request->avatar){
       $avatar = Auth::user()->nim.'.jpg';
       // $request->file('avatar')->storeAs('public/images/avatar', $avatar);
-      $request->file('avatar')->move(public_path().'/images/avatar', $avatar);
+      $request->file('avatar')->move('images/avatar', $avatar);
 
       Anggota::where('id',Auth::user()->id)->update(['avatar'=>$avatar]);
     }
