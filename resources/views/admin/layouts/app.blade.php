@@ -48,6 +48,12 @@
                           <p>User Management</p>
                       </a>
                   </li>
+                  <li class="nav-item {{ Request::is('admin/history-piket') ? 'active' : '' }}">
+                      <a class="nav-link" href="admin/history-piket">
+                          <i class="nc-icon nc-paper-2"></i>
+                          <p>History Piket</p>
+                      </a>
+                  </li>
                   @endif
                   <!-- @if(Auth::user()->id_role == 2)
                   <li class="nav-item {{ Request::is('piket-harian') ? 'active' : '' }}">
@@ -74,6 +80,14 @@
                       <a class="nav-link" href="/peminjaman">
                           <i class="nc-icon nc-zoom-split"></i>
                           <p>List Peminjaman</p>
+                      </a>
+                  </li>
+                  @endif
+                  @if(Auth::user()->id_role == 2)
+                  <li class="nav-item {{ Request::is('history-piket') ? 'active' : '' }}">
+                      <a class="nav-link" href="/history-piket">
+                          <i class="nc-icon nc-paper-2"></i>
+                          <p>History Piket</p>
                       </a>
                   </li>
                   @endif

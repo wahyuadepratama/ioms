@@ -8,6 +8,7 @@ Route::get('profile', 'AnggotaController@profile');
 Route::get('profile/edit', 'AnggotaController@edit');
 Route::post('profile/store', 'AnggotaController@store');
 Route::post('profile/store-password','AnggotaController@storePassword');
+Route::get('history-piket','AnggotaController@indexPiketHarian');
 
 // Route::get('piket-harian','PiketHarianController@index');
 // Route::post('piket-harian/piket/{denda}/{id}','PiketHarianController@piket');
@@ -19,6 +20,7 @@ Route::get('user-management/config/{id}','AdminController@showJadwalPiket');
 Route::post('user-management/config/store','AdminController@storeJadwalPiket');
 Route::get('user-management/reset-password/{id}','AdminController@resetPassword');
 Route::post('user-management/change-role/{id}','AdminController@changeRole');
+Route::get('admin/history-piket','AdminController@indexPiketHarian');
 
 Route::get('anggota-hmsi','AnggotaController@getAllUser');
 

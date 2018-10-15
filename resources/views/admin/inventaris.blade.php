@@ -11,9 +11,11 @@
                     <div class="card-header ">
                         <h4 class="card-title">Daftar Inventaris HMSI</h4>
                     </div>
+                    @if(Auth::user()->id_role == 1)
                     <div class="card-header">
                       <a href="/inventaris/create" class="btn btn-info pull-right">Tambah Inventaris</a>
                     </div>
+                    @endif
                     <div class="card-body">
                       <div class="card-body table-full-width table-responsive">
 
@@ -76,6 +78,7 @@
                                                                   <td>:</td>
                                                                   <td>{{$data->updated_at}}</td>
                                                                 </tr>
+                                                                @if(Auth::user()->id_role == 1)
                                                                 <tr>
                                                                   <td>Action</td>
                                                                   <td>:</td>
@@ -84,6 +87,7 @@
                                                                     <a href="/inventaris/update/{{$data->id}}" class="btn btn-info" style="margin-right: 2px;">Update</a>
                                                                   </td>
                                                                 </tr>
+                                                                @endif
                                                               </table>
                                                             </p>
                                                         </div>

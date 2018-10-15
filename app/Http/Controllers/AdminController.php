@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\PengurusPiket;
+use App\PiketHarian;
 use App\Anggota;
 use App\Role;
 use Carbon\Carbon;
@@ -91,6 +92,14 @@ class AdminController extends Controller
         }
         return redirect('user-management')->with('success','Kamu Berhasil Mengganti Role User');
       }
+    }
+
+    public function indexPiketHarian()
+    {
+      $piketHarian = PiketHarian::join('pengurus_piket','pengurus_piket.id','=','piket_harian.id_pengurus_piket')
+                    ->join('anggota','anggota.id','=','pengurus_piket.id_anggota')
+                    ->get();      
+      return view('admin.admin-history-piket')->with('piketHarian',$piketHarian);
     }
 
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Role;
 use App\Anggota;
 use Carbon\Carbon;
+use App\PiketHarian;
 use App\PengurusPiket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -111,5 +112,12 @@ class AnggotaController extends Controller
               ->where('anggota.id_role','!=','1')
               ->get();
     return view('admin.anggota-hmsi',['users'=>$users]);
+  }
+
+  public function indexPiketHarian()
+  {
+    $data = PengurusPiket::where('id_anggota',Auth::user()->id)->first();
+    $piketHarian = PiketHarian::where('id_pengurus_piket',$data->id)->get();
+    return view('admin.history-piket')->with('piketHarian',$piketHarian);
   }
 }
