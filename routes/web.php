@@ -21,6 +21,7 @@ Route::post('user-management/config/store','AdminController@storeJadwalPiket');
 Route::get('user-management/reset-password/{id}','AdminController@resetPassword');
 Route::post('user-management/change-role/{id}','AdminController@changeRole');
 Route::get('admin/history-piket','AdminController@indexPiketHarian');
+Route::post('admin/history-piket/update','AdminController@updatePiketHarian');
 
 Route::get('anggota-hmsi','AnggotaController@getAllUser');
 

@@ -98,8 +98,19 @@ class AdminController extends Controller
     {
       $piketHarian = PiketHarian::join('pengurus_piket','pengurus_piket.id','=','piket_harian.id_pengurus_piket')
                     ->join('anggota','anggota.id','=','pengurus_piket.id_anggota')
-                    ->get();      
+                    ->select('anggota.*','pengurus_piket.*','piket_harian.*','piket_harian.created_at as tanggal_piket','piket_harian.id as id_piket_harian')
+                    ->get();
+
       return view('admin.admin-history-piket')->with('piketHarian',$piketHarian);
+    }
+
+    public function updatePiketHarian(Request $request)
+    {
+      PiketHarian::where('id',$request->id)->update([
+                    'keterangan' => $request->keterangan,
+                    'denda' => $request->denda
+                  ]);
+      return back()->with('success','Berhasil mengubah history piket');   
     }
 
 }

@@ -34,7 +34,7 @@
                                   <b>No. Anggota</b>
                                 </div>
                                 <div class="col-md-8">
-                                  {{$data->no_anggota}}
+                                  &nbsp;&nbsp;{{$data->no_anggota}}
                                 </div>
                             </div>
 
@@ -52,7 +52,7 @@
                                   <b>No. Handphone</b>
                                 </div>
                                 <div class="col-md-8">
-                                  {{$data->no_handphone}}
+                                  &nbsp;&nbsp;{{$data->no_handphone}}
                                 </div>
                             </div>
 
@@ -62,7 +62,7 @@
                                 </div>
                                 <div class="col-md-8">
                                   @if($data->tempat_lahir != NULL && $data->tanggal_lahir != NULL)
-                                  {{$data->tempat_lahir}} / {{$data->tanggal_lahir}}
+                                  &nbsp;&nbsp;{{$data->tempat_lahir}} / {{$data->tanggal_lahir}}
                                   @endif
                                 </div>
                             </div>
@@ -72,7 +72,7 @@
                                   <b>Alamat</b>
                                 </div>
                                 <div class="col-md-8">
-                                  {{$data->alamat}}
+                                  &nbsp;&nbsp;{{$data->alamat}}
                                 </div>
                             </div>
 
@@ -82,7 +82,7 @@
                                   <b>Total Denda</b>
                                 </div>
                                 <div class="col-md-8">
-                                  Rp.{{$denda}}
+                                  &nbsp;&nbsp;Rp.{{$denda}}
                                 </div>
                             </div>
                             @endif

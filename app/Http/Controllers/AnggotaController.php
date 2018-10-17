@@ -56,12 +56,12 @@ class AnggotaController extends Controller
 
   public function store(Request $request){ // ---------------------------------------- store($request)
 
-    if($request->tanggal_lahir){
-      $time = $request->tanggal_lahir;
-      $date = Carbon::createFromFormat('d/m/Y', $time)->format('Y-d-m');
-    }else{
-      $date = NULL;
-    }
+    // if($request->tanggal_lahir){
+    //   $time = $request->tanggal_lahir;
+    //   $date = Carbon::createFromFormat('d/m/Y', $time)->format('Y-d-m');
+    // }else{
+    //   $date = NULL;
+    // }
 
     $getEmailAnggota = Anggota::where("email",$request->email)->where("id",Auth::user()->id)->first();
     if($getEmailAnggota){
@@ -86,7 +86,7 @@ class AnggotaController extends Controller
                       'no_handphone' => $request->no_handphone,
                       'alamat' => $request->alamat,
                       'tempat_lahir' =>$request->tempat_lahir,
-                      'tanggal_lahir' =>$date,
+                      'tanggal_lahir' =>$request->tanggal_lahir,
                       'kutipan' => $request->kutipan,
                     ]);
     return redirect('profile')->with('success','You have successfully update your profile');

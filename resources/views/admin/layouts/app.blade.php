@@ -49,7 +49,7 @@
                       </a>
                   </li>
                   <li class="nav-item {{ Request::is('admin/history-piket') ? 'active' : '' }}">
-                      <a class="nav-link" href="admin/history-piket">
+                      <a class="nav-link" href="/admin/history-piket">
                           <i class="nc-icon nc-paper-2"></i>
                           <p>History Piket</p>
                       </a>

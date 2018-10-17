@@ -29,14 +29,15 @@
                                   <th>Absen Sore</th>
                                   <th>Keterangan</th>
                                   <th>Denda</th>
+                                  <th>More</th>
                               </thead>
                               <tbody>
                                 @php $no=1; @endphp
                                 @foreach($piketHarian as $data)
                                   <tr>
                                       <td>{{$no}}</td>
-                                      <td>{{ $data->nama }}</td>                                      
-                                      <td>{{ $data->created_at->format('D / d M Y') }}</td>
+                                      <td>{{ $data->nama }}</td>
+                                      <td>{{ date("D / d M Y", strtotime($data->tanggal_piket)) }}</td>
                                       <td>
                                         @if($data->piket_pagi == NULL)
                                           @php echo "-"; @endphp
@@ -55,6 +56,44 @@
                                       </td>
                                       <td>{{ $data->keterangan }}</td>
                                       <td>Rp.{{ $data->denda }}</td>
+                                      <td>
+                                        <a class="btn btn-warning btn-fill" data-toggle="modal" data-target="#view{{$data->id_piket_harian}}" href="#view{{$data->id_piket_harian}}">
+                                            Show
+                                        </a>
+
+                                            <!-- Mini Modal -->
+                                            <div class="modal fade modal modal-primary" id="view{{$data->id_piket_harian}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
+                                                <div class="modal-dialog">
+                                                  <div class="col-md-12" style="padding-top: 5%;">
+                                                    <div class="card" >
+                                                        <div class="card-header ">
+                                                            <h4 class="card-title">Update Data</h4>
+                                                        </div>
+                                                        <div class="card-body">
+                                                          <form action="/admin/history-piket/update" method="post" style="margin-top:2%">
+                                                            {{ csrf_field() }}
+                                                            <input type="hidden" name="id" value="{{ $data->id_piket_harian }}">
+                                                            <table>
+                                                              <tr>
+                                                                <td><input type="text" height="200px" width="100%" name="keterangan" placeholder="Keterangan" value="{{ $data->keterangan }}" style="margin-top:1%" class="form-control"></td>
+                                                              </tr>
+                                                              <tr>
+                                                                <td><input type="number" name="denda" value="{{$data->denda}}" style="margin-top:1%" class="form-control"></td>
+                                                              </tr>
+                                                              <tr>
+                                                                <td><input type="submit" value="Update" class="btn btn-info" style="margin-top:1%"></td>
+                                                              </tr>
+                                                            </table>
+
+
+
+                                                          </form>
+                                                        </div>
+                                                  </div>
+                                                </div>
+                                            </div>
+                                            <!--  End Modal -->
+                                      </td>
                                   </tr>
                                   @php $no++; @endphp
                                 @endforeach

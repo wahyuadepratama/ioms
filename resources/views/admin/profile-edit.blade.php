@@ -48,7 +48,7 @@
                                 No. Anggota
                               </div>
                               <div class="col-md-4">
-                                <input type="text" class="form-control" placeholder="ex: SI06 AB-001" name="no_anggota" value="{{$data->no_anggota}}">
+                                <input type="text" class="form-control" placeholder="ex: SI-VI-01-AB" name="no_anggota" value="{{$data->no_anggota}}">
                                 @if ($errors->has('no_anggota'))
                                     <small><i>{{$errors->first('no_anggota')}}</i></small>
                                 @endif
@@ -64,23 +64,23 @@
                           </div>
                           <div class="row" style="padding: 1%;">
                               <div class="col-md-3">
-                                Tempat Lahir
+                                Tanggal Lahir
                               </div>
-                              <div class="col-md-8">
-                                <input type="text" class="form-control" placeholder="ex: wahyu ade pratama" name="tempat_lahir" value="{{$data->tempat_lahir}}">
-                                @if ($errors->has('tempat_lahir'))
-                                    <small><i>{{$errors->first('tempat_lahir')}}</i></small>
+                              <div class="col-md-4">
+                                <input type="date" class="form-control" placeholder="MM/DD/YY" name="tanggal_lahir">
+                                @if ($errors->has('tanggal_lahir'))
+                                    <small><i>{{$errors->first('tanggal_lahir')}}</i></small>
                                 @endif
                               </div>
                           </div>
                           <div class="row" style="padding: 1%;">
                               <div class="col-md-3">
-                                Tanggal Lahir
+                                Tempat Lahir
                               </div>
-                              <div class="col-md-4">
-                                <input type="text" id="demo" class="form-control" placeholder="ex: wahyu ade pratama" name="tanggal_lahir">
-                                @if ($errors->has('tanggal_lahir'))
-                                    <small><i>{{$errors->first('tanggal_lahir')}}</i></small>
+                              <div class="col-md-8">
+                                <input type="text" class="form-control" placeholder="ex: Padang" name="tempat_lahir" value="{{$data->tempat_lahir}}">
+                                @if ($errors->has('tempat_lahir'))
+                                    <small><i>{{$errors->first('tempat_lahir')}}</i></small>
                                 @endif
                               </div>
                           </div>
