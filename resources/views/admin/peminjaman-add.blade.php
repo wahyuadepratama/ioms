@@ -64,26 +64,26 @@
 
                         <div class="row" style="padding: 1%;">
                             <div class="col-md-3">
-                              Tanggal Pinjam
+                              Phone
                             </div>
                             <div class="col-md-1">
                               :
                             </div>
                             <div class="col-md-4">
-                              <input type="text" class="form-control" name="tanggal_pinjam" id="demo">
-                              @if ($errors->has('tanggal_pinjam'))
-                                  <small><i>{{$errors->first('tanggal_pinjam')}}</i></small>
+                              <input type="text" class="form-control" name="contact">
+                              @if ($errors->has('contact'))
+                                  <small><i>{{$errors->first('contact')}}</i></small>
                               @endif
                             </div>
                         </div>
 
-                        <link href="{{ URL::asset('datepicker/dcalendar.picker.css')}}" rel="stylesheet">
+                        <!-- <link href="{{ URL::asset('datepicker/dcalendar.picker.css')}}" rel="stylesheet">
                         <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
                         <script src="{{ URL::asset('datepicker/dcalendar.picker.js')}}"></script>
                         <script>
                           $('#demo').dcalendarpicker();
                           $('#calendar-demo').dcalendar(); //creates the calendar
-                        </script>
+                        </script> -->
 
                         {{csrf_field()}}<br>
                         <button type="submit" class="btn btn-info btn-fill pull-right">Pinjam Inventaris</button>

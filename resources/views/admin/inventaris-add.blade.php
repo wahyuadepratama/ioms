@@ -17,9 +17,6 @@
                             <div class="col-md-3">
                               Nama
                             </div>
-                            <div class="col-md-1">
-                              :
-                            </div>
                             <div class="col-md-8">
                               <input type="text" class="form-control" name="nama">
                               @if ($errors->has('nama'))
@@ -30,10 +27,19 @@
 
                         <div class="row" style="padding: 1%;">
                             <div class="col-md-3">
-                              Jenis Inventaris
+                              Kode
                             </div>
-                            <div class="col-md-1">
-                              :
+                            <div class="col-md-4">
+                              <input type="text" class="form-control" name="kode">
+                              @if ($errors->has('kode'))
+                                  <small><i>{{$errors->first('kode')}}</i></small>
+                              @endif
+                            </div>
+                        </div>
+
+                        <div class="row" style="padding: 1%;">
+                            <div class="col-md-3">
+                              Jenis Inventaris
                             </div>
                             <div class="col-md-8">
                               <select class="form-control" name="id_jenis">
@@ -47,9 +53,6 @@
                         <div class="row" style="padding: 1%;">
                             <div class="col-md-3">
                               Kondisi
-                            </div>
-                            <div class="col-md-1">
-                              :
                             </div>
                             <div class="col-md-8">
                               <select class="form-control" name="kondisi">
@@ -65,9 +68,6 @@
                             <div class="col-md-3">
                               Jumlah Inventaris
                             </div>
-                            <div class="col-md-1">
-                              :
-                            </div>
                             <div class="col-md-8">
                               <input type="number" class="form-control" name="qty">
                               @if ($errors->has('qty'))
@@ -79,9 +79,6 @@
                         <div class="row" style="padding: 1%;">
                             <div class="col-md-3">
                               Keterangan
-                            </div>
-                            <div class="col-md-1">
-                              :
                             </div>
                             <div class="col-md-8">
                               <input type="text" class="form-control" name="keterangan">
@@ -102,7 +99,7 @@
             <div class="col-md-5">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Jenis Inventaris</h4>
+                        <h4 class="card-title">Tambah Jenis Inventaris</h4>
                     </div>
                     <div class="card-body">
 
@@ -111,11 +108,8 @@
                             <div class="col-md-4">
                               Nama
                             </div>
-                            <div class="col-md-1">
-                              :
-                            </div>
                             <div class="col-md-7">
-                              <input type="text" class="form-control" name="nama_jenis">
+                              <input type="text" class="form-control" name="nama_jenis" required>
                               @if ($errors->has('nama_jenis'))
                                   <small><i>{{$errors->first('nama_jenis')}}</i></small>
                               @endif
@@ -126,11 +120,8 @@
                             <div class="col-md-4">
                               Keterangan
                             </div>
-                            <div class="col-md-1">
-                              :
-                            </div>
                             <div class="col-md-7">
-                              <input type="text" class="form-control" name="keterangan_jenis">
+                              <input type="text" class="form-control" name="keterangan_jenis" required>
                               @if ($errors->has('keterangan'))
                                   <small><i>{{$errors->first('keterangan')}}</i></small>
                               @endif

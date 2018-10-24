@@ -25,6 +25,7 @@ class InventarisController extends Controller
   public function validator(array $data){ // -------------------------------------------------------------------- validator($data)
       return Validator::make($data, [
           'nama' => 'required|string|max:191',
+          'kode' => 'required|unique:inventaris',
           'kondisi' => 'required|string',
           'qty' => 'required|integer',
       ]);
@@ -45,6 +46,7 @@ class InventarisController extends Controller
         'keterangan' => $request->keterangan,
         'qty' => $request->qty,
         'created_at' => Carbon::now()->setTimezone('Asia/Jakarta'),
+        'kode' => $request->kode,
     ]);
     return redirect('inventaris')->with('success','Inventaris Berhasil Ditambah!');
   }
@@ -55,8 +57,16 @@ class InventarisController extends Controller
     return view('admin.inventaris-update',['data'=>$data, 'jenis'=>$jenis]);
   }
 
+  public function validatorUpdate(array $data){ // -------------------------------------------------------------------- validator($data)
+      return Validator::make($data, [
+          'nama' => 'required|string|max:191',
+          'kondisi' => 'required|string',
+          'qty' => 'required|integer',
+      ]);
+  }
+
   public function storeUpdate(Request $request){ //-------------------------------------------------------------------- storeUpdate($request)
-    $this->validator($request->all())->validate();
+    $this->validatorUpdate($request->all())->validate();
     $inventaris = Inventaris::find($request->id);
     $inventaris->nama = $request->nama;
     $inventaris->id_jenis = $request->id_jenis;

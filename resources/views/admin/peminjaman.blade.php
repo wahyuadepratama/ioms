@@ -41,14 +41,14 @@
                                       <td>{{$data->nama}}</td>
                                       <td>
                                         @if($data->active == true)
-                                          @php echo "Belum Dikembalikan"; @endphp
+                                          @php echo "<button type='button' class='btn btn-danger'>Belum Dikembalikan</button>"; @endphp
                                         @else
-                                            @php echo "Sudah Dikembalikan"; @endphp
+                                            @php echo "<button type='button' class='btn btn-success'>Sudah Dikembalikan</button>"; @endphp
                                         @endif
                                       </td>
-                                      <td>{{$data->tanggal_pinjam}}</td>
+                                      <td>@php $date = date_create($data->tanggal_pinjam); echo date_format($date, 'l jS F Y H:i:s'); @endphp</td>
                                       <td>
-                                        <a class="btn btn-danger btn-fill" data-toggle="modal" data-target="#view{{$data->id_peminjaman}}" href="#view{{$data->id}}">
+                                        <a class="btn btn-danger btn-fill" data-toggle="modal" data-target="#view{{$data->id_peminjaman}}" href="#view{{$data->id_peminjaman}}">
                                             Show
                                         </a>
 
@@ -64,9 +64,14 @@
                                                             <p class="description text-center" style="text-align:center;">
                                                               <table>
                                                                 <tr>
+                                                                  <td>Kontak Person</td>
+                                                                  <td>:</td>
+                                                                  <td>{{$data->contact}}</td>
+                                                                </tr>
+                                                                <tr>
                                                                   <td>Tanggal Kembali</td>
                                                                   <td>:</td>
-                                                                  <td>{{$data->tanggal_kembali}}</td>
+                                                                  <td>@php $date = date_create($data->tanggal_kembali); echo date_format($date, 'l jS F Y H:i:s'); @endphp</td>
                                                                 </tr>
                                                                 <tr>
                                                                   <td>Durasi</td>
@@ -78,7 +83,9 @@
                                                                   <td>:</td>
                                                                   <td>
                                                                     @if($data->active == true)
-                                                                      <a href="/peminjaman/pengembalian/{{$data->id}}" class="btn btn-danger" style="margin-right: 2px;">Kembalikan</a>
+                                                                      <a href="/peminjaman/pengembalian/{{$data->id_peminjaman}}" class="btn btn-success" style="margin-right: 2px;">Kembalikan</a>
+                                                                    @else
+                                                                      <a href="/peminjaman/destroy/{{$data->id_peminjaman}}" class="btn btn-danger btn-fill" style="margin-right: 2px;">Hapus Data</a>
                                                                     @endif
                                                                   </td>
                                                                 </tr>

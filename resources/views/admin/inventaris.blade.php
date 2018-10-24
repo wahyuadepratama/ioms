@@ -28,6 +28,7 @@
                           <table class="table table-hover" id="table_id">
                               <thead>
                                   <th>No</th>
+                                  <th>Kode</th>
                                   <th>Nama</th>
                                   <th>Jenis</th>
                                   <th>Status</th>
@@ -42,6 +43,7 @@
                                 @foreach($inventaris as $data)
                                   <tr>
                                       <td>{{$no}}</td>
+                                      <td>{{ $data->kode }}</td>
                                       <td>{{$data->nama}}</td>
                                       <td>{{$data->nama_jenis}}</td>
                                       <td>{{$data->status}}</td>

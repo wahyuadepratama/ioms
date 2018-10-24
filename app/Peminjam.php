@@ -9,7 +9,7 @@ class Peminjam extends Model
   protected $table = 'peminjam';
 
   protected $fillable = [
-      'nama','nim','created_at','updated_at'
+      'nama','nim','created_at','updated_at','contact'
   ];
 
   public $appends = [

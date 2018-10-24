@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use App\Inventaris;
 use App\Peminjaman;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class PeminjamanController extends Controller
@@ -33,17 +34,18 @@ class PeminjamanController extends Controller
           'nama' => 'required|string|max:191',
           'nim' => 'required|digits:10',
           'durasi' => 'required|numeric',
-          'tanggal_pinjam' => 'required',
+          'contact' => 'required|max:15',
       ]);
   }
 
   public function store(Request $request){ // -------------------------------------------- store($request)
     $this->validator($request->all())->validate();
-    $time = $request->tanggal_pinjam;
-    $date = Carbon::createFromFormat('d/m/Y', $time);
+
+    // $date = Carbon::createFromFormat('d/m/Y', $time)->setTimezone('Asia/Jakarta');
     $peminjam = Peminjam::create([
         'nama' => $request->nama,
-        'nim' => $request->nim,
+        'nim' => $request->nim,'tanggal_pinjam' => 'required',
+        'contact' => $request->contact,
         'created_at' => Carbon::now()->setTimezone('Asia/Jakarta'),
     ]);
     Peminjaman::create([
@@ -51,7 +53,7 @@ class PeminjamanController extends Controller
       'id_inventaris' => $request->id,
       'durasi' => $request->durasi,
       'active' => true,
-      'tanggal_pinjam' => $date,
+      'tanggal_pinjam' => Carbon::now()->setTimezone('Asia/Jakarta'),
       'created_at' => Carbon::now()->setTimezone('Asia/Jakarta'),
     ]);
     $inventaris = Inventaris::find($request->id);
@@ -68,6 +70,16 @@ class PeminjamanController extends Controller
     $peminjaman->updated_at = Carbon::now()->setTimezone('Asia/Jakarta');
     $peminjaman->save();
     return redirect('peminjaman')->with('success','Inventaris telah dikembalikan');
+  }
+
+  public function destroyPengembalian($id)
+  {
+    if(Auth::user()->id_role == 2)
+      return back()->with('success','Kamu tidak diizinkan menghapus data ini, silahkan hubungi admin!');
+
+    $data = Peminjaman::find($id);
+    $data->delete();
+    return back()->with('success','Data berhasil dihapus!');
   }
 
 }

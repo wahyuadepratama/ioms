@@ -42,7 +42,7 @@ class AnggotaController extends Controller
   public function validator(array $data){ // ---------------------------------------- validator($data)
       return Validator::make($data, [
           'nama' => 'required|string|max:191',
-          'no_anggota' => 'max:10',
+          'no_anggota' => 'max:15',
           'avatar' => 'mimes:jpeg,jpg,png|max:1000',
       ]);
   }

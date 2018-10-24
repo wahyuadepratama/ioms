@@ -9,6 +9,6 @@ class Inventaris extends Model
   protected $table = 'inventaris';
 
   protected $fillable = [
-      'nama', 'id_jenis' ,'status','kondisi','keterangan','qty','created_at','updated_at'
+      'nama', 'id_jenis' ,'status','kondisi','keterangan','qty','created_at','updated_at','kode'
   ];
 }

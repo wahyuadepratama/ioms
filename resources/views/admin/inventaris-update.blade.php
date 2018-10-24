@@ -15,10 +15,16 @@
 
                         <div class="row" style="padding: 1%;">
                             <div class="col-md-3">
-                              Nama
+                              Kode
                             </div>
-                            <div class="col-md-1">
-                              :
+                            <div class="col-md-8">
+                              <input type="text" class="form-control" value="{{$data->kode}}" disabled>                              
+                            </div>
+                        </div>
+
+                        <div class="row" style="padding: 1%;">
+                            <div class="col-md-3">
+                              Nama
                             </div>
                             <div class="col-md-8">
                               <input type="text" class="form-control" name="nama" value="{{$data->nama}}">
@@ -33,9 +39,6 @@
                             <div class="col-md-3">
                               Jenis Inventaris
                             </div>
-                            <div class="col-md-1">
-                              :
-                            </div>
                             <div class="col-md-8">
                               <select class="form-control" name="id_jenis">
                                 @foreach($jenis as $isi)
@@ -48,9 +51,6 @@
                         <div class="row" style="padding: 1%;">
                             <div class="col-md-3">
                               Kondisi
-                            </div>
-                            <div class="col-md-1">
-                              :
                             </div>
                             <div class="col-md-8">
                               <select class="form-control" name="kondisi">
@@ -66,9 +66,6 @@
                             <div class="col-md-3">
                               Jumlah Inventaris
                             </div>
-                            <div class="col-md-1">
-                              :
-                            </div>
                             <div class="col-md-8">
                               <input type="number" class="form-control" name="qty" value="{{$data->qty}}">
                               @if ($errors->has('qty'))
@@ -80,9 +77,6 @@
                         <div class="row" style="padding: 1%;">
                             <div class="col-md-3">
                               Keterangan
-                            </div>
-                            <div class="col-md-1">
-                              :
                             </div>
                             <div class="col-md-8">
                               <input type="text" class="form-control" name="keterangan" value="{{$data->keterangan}}">

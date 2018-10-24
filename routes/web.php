@@ -40,3 +40,4 @@ Route::post('inventaris/peminjaman/store','PeminjamanController@store');
 
 Route::get('peminjaman','PeminjamanController@showAll');
 Route::get('peminjaman/pengembalian/{id}','PeminjamanController@updatePengembalian');
+Route::get('peminjaman/destroy/{id}','PeminjamanController@destroyPengembalian');
