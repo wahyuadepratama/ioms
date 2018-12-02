@@ -110,7 +110,13 @@ class AdminController extends Controller
                     'keterangan' => $request->keterangan,
                     'denda' => $request->denda
                   ]);
-      return back()->with('success','Berhasil mengubah history piket');   
+      return back()->with('success','Berhasil mengubah history piket');
+    }
+
+    public function indexRekapDenda()
+    {
+      $rekap = PengurusPiket::join('anggota','anggota.id','=','pengurus_piket.id_anggota')->select('pengurus_piket.*','anggota.*')->get();
+      return view('admin.admin-rekap-denda')->with('rekap', $rekap);
     }
 
 }

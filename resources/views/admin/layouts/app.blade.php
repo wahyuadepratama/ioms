@@ -54,6 +54,12 @@
                           <p>History Piket</p>
                       </a>
                   </li>
+                  <li class="nav-item {{ Request::is('admin/rekap-denda') ? 'active' : '' }}">
+                      <a class="nav-link" href="/admin/rekap-denda">
+                          <i class="nc-icon nc-attach-87"></i>
+                          <p>Rekap Denda</p>
+                      </a>
+                  </li>
                   @endif
                   <!-- @if(Auth::user()->id_role == 2)
                   <li class="nav-item {{ Request::is('piket-harian') ? 'active' : '' }}">
